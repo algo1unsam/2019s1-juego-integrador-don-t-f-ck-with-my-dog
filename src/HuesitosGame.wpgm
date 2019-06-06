@@ -1,0 +1,14 @@
+import wollok.game.*
+import franky.*
+
+program DontFuckWithMyDog {
+
+	game.title("Don't fuck with my Dog!")
+	game.height(15)
+	game.width(30)
+	game.ground("ground.jpg")
+	
+	game.addVisual(franky)
+	
+	game.start()
+}
