@@ -16,4 +16,4 @@ program DontFuckWithMyDog {
 	keyboard.right().onPressDo { franky.movimiento(derecha, "franky-right.png") }
 	
 	game.start()
-}
+} 
