@@ -3,8 +3,10 @@ import franky.*
 import Direcciones.*
 
 class Enemigo {
-	var position
-	var imagen
+	var property position 
+	var imagen = "wolf.gif"
+	
+	method image() = imagen
 	
 	method movimiento(){
 		
@@ -25,7 +27,7 @@ class Lobo inherits Enemigo {
 		}
 	}
 	method move(nuevaPosicion) {
-		self.position(nuevaPosicion)
+		self.position(nuevaPosicion) 
 	}
 	method cambiarDireccion(imagenDireccion){
 		if (direccion == izquierda){

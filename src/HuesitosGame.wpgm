@@ -6,8 +6,8 @@ import enemigos.*
 program DontFuckWithMyDog {
 
 	game.title("Don't fuck with my Dog!")
-	game.height(15)
-	game.width(30)
+	game.height(13)
+	game.width(25)
 	game.ground("ground.jpg")
 	
 	game.addVisual(franky)
@@ -17,7 +17,7 @@ program DontFuckWithMyDog {
 	keyboard.left().onPressDo { franky.movimiento(izquierda, "franky-left.png")}
 	keyboard.right().onPressDo { franky.movimiento(derecha, "franky-right.png") }
 	
-	game.onTick(5,"lobo enemigo",{new Lobo(position=game.at(16,25)).avanzar()})
+	game.onTick(5,"lobo enemigo",{new Lobo(position = game.at(16,25)).avanzar()})
 	
 	
 	game.start()

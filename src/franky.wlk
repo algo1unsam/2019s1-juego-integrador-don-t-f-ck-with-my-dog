@@ -4,7 +4,9 @@ import Direcciones.*
 object franky {
 	var property position = game.at(3,3)
 	var property direccion = derecha
-	var property imagen ="franky-right.png" 
+	var imagen = "franky-right.png" 
+	
+	method image() = imagen
 	
 	method cambiarDireccion(imagenDireccion, nuevaDireccion){
 		direccion = nuevaDireccion
