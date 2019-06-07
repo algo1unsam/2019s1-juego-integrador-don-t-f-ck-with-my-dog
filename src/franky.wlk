@@ -1,16 +1,14 @@
 import wollok.game.*
+import Direcciones.*
 
 object franky {
 	var property position = game.at(3,3)
-	var property direccion
-	var property imagen 
+	var property direccion = derecha
+	var property imagen ="franky-right.png" 
 	
-	method image(){
-		return imagen
-	}
 	method cambiarDireccion(imagenDireccion, nuevaDireccion){
-		direccion=nuevaDireccion
-		imagen=imagenDireccion
+		direccion = nuevaDireccion
+		imagen = imagenDireccion
 	}
 	method movimiento(direccionTecla, imagenDireccion){
 		if (self.direccion() == direccionTecla){
@@ -20,30 +18,9 @@ object franky {
 				self.cambiarDireccion(imagenDireccion, direccionTecla)
 			}
 	}
+	method move(nuevaPosicion) {
+		self.position(nuevaPosicion)
+	}
 	
 }
 
-object derecha {
-	
-	method mover(algo){
-		algo.move(algo.position().right(1))
-	}
-}
-object izquierda {
-	
-	method mover(algo){
-		algo.move(algo.position().left(1))
-	}
-}
-object arriba {
-	
-	method mover(algo){
-		algo.move(algo.position().up(1))
-	}
-}
-object abajo {
-	
-	method mover(algo){
-		algo.move(algo.position().down(1))
-	}
-}
