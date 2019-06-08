@@ -4,9 +4,7 @@ import Direcciones.*
 
 class Enemigo {
 	var property position 
-	var imagen = "wolf.gif"
-	
-	method image() = imagen
+	var property direccion
 	
 	method movimiento(){
 		
@@ -15,29 +13,64 @@ class Enemigo {
 
 class Lobo inherits Enemigo {
 	var pasos = 0
-	var direccion = izquierda
+	var imagen = "wolf.gif"
+	
+	method image() = imagen
+	
+	method moverse() {
+		game.onTick(500,"lobo enemigo",{ self.avanzar() })
+	}	
 	
 	method avanzar(){
 		if (pasos < 5){
-		direccion.mover(self)
-		pasos++
+			direccion.mover(self)
+			pasos++
 		}
-		else {
-			self.cambiarDireccion("tumba.gif")
-		}
+		else { self.cambiarDireccion() }
 	}
 	method move(nuevaPosicion) {
 		self.position(nuevaPosicion) 
 	}
-	method cambiarDireccion(imagenDireccion){
+	method cambiarDireccion(){
 		if (direccion == izquierda){
-		direccion = derecha
+			direccion = derecha
+			imagen = "tumba.gif"
 		}
 		else {
 			direccion = izquierda
-			pasos = 0
+			imagen = "wolf.gif"
 		}
-		
-		imagen = imagenDireccion
+		pasos = 0
 	}
 }
+
+class Flecha inherits Enemigo{
+	
+	method image() = "tumba.gif"
+	
+	method moverse() {
+		direccion.mover(self)
+	}
+	
+	method move(nuevaPosicion) {
+		self.position(nuevaPosicion)
+	}
+}
+
+class Arquero inherits Enemigo{
+	method image() = "franky-left.png"
+	
+	method disparar() {
+		var flecha = new Flecha(position = self.position(), direccion = izquierda)
+			game.addVisual(flecha)
+			flecha.moverse()
+		
+		/*game.onTick(200,"disparo de flecha",{ 
+			
+			flecha = new Flecha(position = self.position(), direccion = izquierda)
+			game.addVisual(flecha)
+		})*/
+	} 
+}	
+
+

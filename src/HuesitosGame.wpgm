@@ -10,6 +10,20 @@ program DontFuckWithMyDog {
 	game.width(25)
 	game.ground("ground.jpg")
 	
+	var lobo1 = new Lobo(position = game.at(9,8), direccion = izquierda)
+	var lobo2 = new Lobo(position = game.at(15,5), direccion = izquierda)
+	
+	var arquero1 = new Arquero(position = game.at(16,3), direccion = izquierda)
+
+	game.addVisual(lobo1)
+	game.addVisual(lobo2)
+	
+	game.addVisual(arquero1)
+	arquero1.disparar()
+	
+	lobo1.moverse()
+	lobo2.moverse()
+	
 	game.addVisual(franky)
 	
 	keyboard.up().onPressDo { franky.movimiento(arriba, "franky-back.png") }
@@ -17,7 +31,6 @@ program DontFuckWithMyDog {
 	keyboard.left().onPressDo { franky.movimiento(izquierda, "franky-left.png")}
 	keyboard.right().onPressDo { franky.movimiento(derecha, "franky-right.png") }
 	
-	game.onTick(5,"lobo enemigo",{new Lobo(position = game.at(16,25)).avanzar()})
 	
 	
 	game.start()
