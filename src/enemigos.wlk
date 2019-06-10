@@ -64,6 +64,7 @@ class Lobo inherits Enemigo {
 class Murcielago inherits Enemigo{
 	var pasos = 0
 	var imagen = "murcielago.png"
+	var vida = 2
 	
 	method image() = imagen
 	
@@ -90,6 +91,11 @@ class Murcielago inherits Enemigo{
 	//		imagen = "wolf.gif"
 		}
 		pasos = 0
+	}
+	
+	override method esAtacado() {
+		vida --
+		if (vida == 0) { super() }
 	}
 }
 
