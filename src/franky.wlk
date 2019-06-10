@@ -50,5 +50,8 @@ object noVida { method image() = "life-out.png" }
 
 object pared {
 	method image() = "wall.png"
+	method chocarCon(jugador){
+		jugador.direccion().retroceder(jugador)
+	}
 }
 
