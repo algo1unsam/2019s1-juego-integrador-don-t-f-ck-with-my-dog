@@ -3,7 +3,7 @@ import franky.*
 import Direcciones.*
 import enemigos.*
 import constructorTablero.*
-import ayudas.* 
+import ayudas.*  
 
 program DontFuckWithMyDog {  
  
@@ -61,7 +61,7 @@ program DontFuckWithMyDog {
 	game.addVisualIn(pared, game.at(19,5))
 	game.addVisualIn(pared, game.at(19,4))
 	game.addVisualIn(pared, game.at(19,3))
-//	game.addVisualIn(pared, game.at(19,2))
+	game.addVisualIn(pared, game.at(19,2))
 //	game.addVisualIn(pared, game.at(19,1))
 	
 	//PARED ABAJO
@@ -126,7 +126,7 @@ program DontFuckWithMyDog {
 	var lobo2 = new Lobo(posicionInicial = game.at(15,4), direccionInicial = izquierda)
 	var murcielago1 = new Murcielago(posicionInicial = game.at(16,11), direccionInicial = abajo)
 //	var arquero1 = new Arquero(posicionInicial = game.at(16,3), direccionInicial = izquierda)
-	var puerta = new Puerta(position = game.at(10,3))
+	var puerta = new Puerta(position = game.at(19,1))
 	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
 	
 	
@@ -140,7 +140,7 @@ program DontFuckWithMyDog {
 	lobo2.moverse()
 	murcielago1.moverse()
 	constructorTablero.agregarPalancaTablero(palanca)
-//	game.addVisual(puerta)
+	game.addVisual(puerta)
 	game.addVisual(franky)
 	
 	keyboard.up().onPressDo { franky.movimiento(arriba, "franky-back.png") }

@@ -6,6 +6,7 @@ object franky {
 	var property position = game.at(1,1)
 	var property direccion = derecha
 	var imagen = "franky-right.png" 
+	var vida = 3
 	
 	method image() = imagen
 	
@@ -14,6 +15,8 @@ object franky {
 		//Al morir tiene que dejar el tablero como iniciado el juego por eso llamo a estos dos métodos
 		constructorTablero.reestablecerEnemigos()
 		constructorTablero.desactivarPalancas()
+		vida --
+		if (vida == 0) { game.stop() }
 	}
 	method activar(){
 		//devuelve la siguiente posicion de la direccion actual del jugador, luego activa todos los elementos en dicha posicion

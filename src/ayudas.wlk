@@ -33,22 +33,24 @@ class Palanca{
 	}
 }
 class Puerta{
-	var property position=game.at(0,0)
+	var property position
 	var estaAbierto=false
 	 
 	method abrir(){
 		estaAbierto=true
+		game.removeVisual(self)
 	}
 	method cerrar(){
 		estaAbierto=false
 	}
-	method image(){
-		if (estaAbierto){
-			return "franky-left.png"
+ 	method image(){
+/*/		if (estaAbierto){
+			return "wall.png"
 		}
 		else {
 			return "franky-front.png"
-		}
+		}*/
+		return "wall.png"
 	}
 	method chocarCon(jugador){
 		if (!estaAbierto){
