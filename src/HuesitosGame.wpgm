@@ -11,9 +11,8 @@ program DontFuckWithMyDog {
 	game.height(13)
 	game.width(20)
 	game.ground("ground.png")
-	
 
-	
+
  	//PARED IZQUIERDA
 	game.addVisualIn(pared, game.at(0,0))
 	game.addVisualIn(pared, game.at(0,1))
@@ -86,6 +85,37 @@ program DontFuckWithMyDog {
 	game.addVisualIn(pared, game.at(2,0))
 	game.addVisualIn(pared, game.at(1,0))
 	
+	//laberinto
+	game.addVisualIn(pared, game.at(3,1))
+	game.addVisualIn(pared, game.at(1,3))
+	game.addVisualIn(pared, game.at(1,7))
+	game.addVisualIn(pared, game.at(1,8))
+	game.addVisualIn(pared, game.at(2,3))
+	game.addVisualIn(pared, game.at(2,5))
+	game.addVisualIn(pared, game.at(2,10))
+	game.addVisualIn(pared, game.at(3,3))
+	game.addVisualIn(pared, game.at(4,7))
+	game.addVisualIn(pared, game.at(6,7))
+	game.addVisualIn(pared, game.at(3,4))
+	game.addVisualIn(pared, game.at(3,5))
+	game.addVisualIn(pared, game.at(3,6))
+	game.addVisualIn(pared, game.at(3,7))
+	game.addVisualIn(pared, game.at(3,8))
+	game.addVisualIn(pared, game.at(3,9))
+	game.addVisualIn(pared, game.at(3,10))
+	game.addVisualIn(pared, game.at(4,9))
+	game.addVisualIn(pared, game.at(5,2))
+	game.addVisualIn(pared, game.at(5,3))
+	game.addVisualIn(pared, game.at(5,4))
+	game.addVisualIn(pared, game.at(6,4))
+	game.addVisualIn(pared, game.at(6,5))
+	game.addVisualIn(pared, game.at(6,6))
+	game.addVisualIn(pared, game.at(6,9))
+	game.addVisualIn(pared, game.at(7,7))
+	game.addVisualIn(pared, game.at(8,7))
+	game.addVisualIn(pared, game.at(9,7))
+	
+	
 	//vida
 	game.addVisualIn(noVida, game.at(23,12))
 	game.addVisualIn(vida, game.at(22,12))
@@ -93,24 +123,24 @@ program DontFuckWithMyDog {
 	
 	
 	var lobo1 = new Lobo(posicionInicial = game.at(9,8), direccionInicial = izquierda)
-	var lobo2 = new Lobo(posicionInicial = game.at(15,5), direccionInicial = izquierda)
-	var murcielago1 = new Murcielago(posicionInicial = game.at(15,10), direccionInicial = abajo)
-	var arquero1 = new Arquero(posicionInicial = game.at(16,3), direccionInicial = izquierda)
+	var lobo2 = new Lobo(posicionInicial = game.at(15,4), direccionInicial = izquierda)
+	var murcielago1 = new Murcielago(posicionInicial = game.at(16,11), direccionInicial = abajo)
+//	var arquero1 = new Arquero(posicionInicial = game.at(16,3), direccionInicial = izquierda)
 	var puerta = new Puerta(position = game.at(10,3))
-	var palanca = new Palanca(position = game.at(3,10),objetoCerrado=puerta)
+	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
 	
 	
-	lobo1.agregarEnTablero()
+	lobo1.agregarEnTablero() 
 	lobo2.agregarEnTablero()
 	murcielago1.agregarEnTablero()
-	arquero1.agregarEnTablero()
-	arquero1.disparar()
+//	arquero1.agregarEnTablero()
+//	arquero1.disparar()
 	
 	lobo1.moverse()
 	lobo2.moverse()
 	murcielago1.moverse()
 	constructorTablero.agregarPalancaTablero(palanca)
-	game.addVisual(puerta)
+//	game.addVisual(puerta)
 	game.addVisual(franky)
 	
 	keyboard.up().onPressDo { franky.movimiento(arriba, "franky-back.png") }

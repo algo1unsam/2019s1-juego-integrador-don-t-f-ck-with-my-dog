@@ -3,14 +3,14 @@ import Direcciones.*
 import constructorTablero.*
 
 object franky {
-	var property position = game.at(3,3)
+	var property position = game.at(1,1)
 	var property direccion = derecha
 	var imagen = "franky-right.png" 
 	
 	method image() = imagen
 	
 	method morir(){
-		position = game.at(3,3)
+		position = game.at(1,1)
 		//Al morir tiene que dejar el tablero como iniciado el juego por eso llamo a estos dos métodos
 		constructorTablero.reestablecerEnemigos()
 		constructorTablero.desactivarPalancas()

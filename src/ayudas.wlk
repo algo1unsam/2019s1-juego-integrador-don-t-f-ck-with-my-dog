@@ -10,10 +10,10 @@ class Palanca{
 	
 	method image(){
 		if (estaActivo){
-			return "franky-left.png"
+			return "palanca-activada.png"
 		}
 		else {
-			return "franky-front.png"
+			return "palanca-desactivada.png"
 		}
 	}
 	method activar(){
