@@ -2,6 +2,8 @@ import wollok.game.*
 import franky.*
 import Direcciones.*
 import enemigos.*
+import constructorTablero.*
+import ayudas.*
 
 program DontFuckWithMyDog {
 
@@ -10,27 +12,34 @@ program DontFuckWithMyDog {
 	game.width(25)
 	game.ground("ground.jpg")
 	
-	var lobo1 = new Lobo(position = game.at(9,8), direccion = izquierda)
-	var lobo2 = new Lobo(position = game.at(15,5), direccion = izquierda)
+	var lobo1 = new Lobo(posicionInicial = game.at(9,8), direccionInicial = izquierda)
+	var lobo2 = new Lobo(posicionInicial = game.at(15,5), direccionInicial = izquierda)
+	var murcielago1 = new Murcielago(posicionInicial = game.at(5,3), direccionInicial = abajo)
+	var arquero1 = new Arquero(posicionInicial = game.at(16,3), direccionInicial = izquierda)
+	var puerta = new Puerta(position = game.at(10,3))
+	var palanca = new Palanca(position = game.at(3,10),objetoCerrado=puerta)
 	
-	var arquero1 = new Arquero(position = game.at(16,3), direccion = izquierda)
-
-	game.addVisual(lobo1)
-	game.addVisual(lobo2)
 	
-	game.addVisual(arquero1)
+	lobo1.agregarEnTablero()
+	lobo2.agregarEnTablero()
+	murcielago1.agregarEnTablero()
+	arquero1.agregarEnTablero()
 	arquero1.disparar()
 	
 	lobo1.moverse()
 	lobo2.moverse()
-	
+	murcielago1.moverse()
+	constructorTablero.agregarPalancaTablero(palanca)
+	game.addVisual(puerta)
 	game.addVisual(franky)
 	
 	keyboard.up().onPressDo { franky.movimiento(arriba, "franky-back.png") }
 	keyboard.down().onPressDo { franky.movimiento(abajo, "franky-front.png") }
 	keyboard.left().onPressDo { franky.movimiento(izquierda, "franky-left.png")}
 	keyboard.right().onPressDo { franky.movimiento(derecha, "franky-right.png") }
-	
+	keyboard.space().onPressDo { franky.atacar()}
+	keyboard.a().onPressDo { franky.activar()}
+	game.whenCollideDo(franky, {enemigo => enemigo.chocarCon(franky)})
 	
 	
 	game.start()
