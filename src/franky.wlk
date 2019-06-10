@@ -44,3 +44,11 @@ object franky {
 	
 }
 
+object vida { method image() = "life.png" }
+
+object noVida { method image() = "life-out.png" }
+
+object pared {
+	method image() = "wall.png"
+}
+

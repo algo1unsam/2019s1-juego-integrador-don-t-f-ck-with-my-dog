@@ -29,9 +29,9 @@ class Enemigo {
 class Lobo inherits Enemigo {
 	var pasos = 0
 	//wolf.gif
-	var imagen = "franky-left.png"
+	var imagen = "wolf-left.png"
 	
-	method image() = imagen
+	method image() = imagen 
 	
 	method moverse() {
 		game.onTick(500,"lobo enemigo",{ self.avanzar() })
@@ -50,13 +50,11 @@ class Lobo inherits Enemigo {
 	method cambiarDireccion(){
 		if (direccion == izquierda){
 			direccion = derecha
-			imagen = "franky-right.png"
-			////tumba.gif
+			imagen = "wolf-right.png"
 		}
 		else {
 			direccion = izquierda
-			imagen = "franky-left.png"
-			////wolf.gif
+			imagen = "wolf-left.png"
 		}
 		pasos = 0
 	}
@@ -65,12 +63,12 @@ class Lobo inherits Enemigo {
 
 class Murcielago inherits Enemigo{
 	var pasos = 0
-	var imagen = "wolf.gif"
+	var imagen = "murcielago.png"
 	
 	method image() = imagen
 	
 	method moverse() {
-		game.onTick(50,"murcielago enemigo",{ self.avanzar() })
+		game.onTick(200,"murcielago enemigo",{ self.avanzar() })
 	}
 	method avanzar(){
 		if (pasos < 5){
@@ -85,18 +83,18 @@ class Murcielago inherits Enemigo{
 	method cambiarDireccion(){
 		if (direccion == abajo){
 			direccion = arriba
-			imagen = "tumba.gif"
+	//		imagen = "tumba.gif"
 		}
 		else {
 			direccion = abajo
-			imagen = "wolf.gif"
+	//		imagen = "wolf.gif"
 		}
 		pasos = 0
 	}
 }
 
-class Arquero inherits Enemigo{
-	method image() = "franky-left.png"
+class Arquero inherits Enemigo{ 
+	method image() = "flecha-left.png"
 	
 	method disparar() {
 		var flecha = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = izquierda)
@@ -112,7 +110,7 @@ class Arquero inherits Enemigo{
 
 class Flecha inherits Enemigo{
 	
-	method image() = "franky-front.png"
+	method image() = "flecha-left.png"
 	
 	method moverse() {
 		direccion.mover(self)

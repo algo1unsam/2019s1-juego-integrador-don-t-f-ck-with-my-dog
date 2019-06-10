@@ -3,18 +3,98 @@ import franky.*
 import Direcciones.*
 import enemigos.*
 import constructorTablero.*
-import ayudas.*
+import ayudas.* 
 
-program DontFuckWithMyDog {
-
+program DontFuckWithMyDog {  
+ 
 	game.title("Don't fuck with my Dog!")
 	game.height(13)
-	game.width(25)
-	game.ground("ground.jpg")
+	game.width(20)
+	game.ground("ground.png")
+	
+
+	
+ 	//PARED IZQUIERDA
+	game.addVisualIn(pared, game.at(0,0))
+	game.addVisualIn(pared, game.at(0,1))
+	game.addVisualIn(pared, game.at(0,2))
+	game.addVisualIn(pared, game.at(0,3))
+	game.addVisualIn(pared, game.at(0,4))
+	game.addVisualIn(pared, game.at(0,5))
+	game.addVisualIn(pared, game.at(0,6))
+	game.addVisualIn(pared, game.at(0,7))
+	game.addVisualIn(pared, game.at(0,8))
+	game.addVisualIn(pared, game.at(0,9))
+	game.addVisualIn(pared, game.at(0,10))
+	game.addVisualIn(pared, game.at(0,11))
+	game.addVisualIn(pared, game.at(0,12))
+	
+	//PARED ARRIBA
+	game.addVisualIn(pared, game.at(1,12))
+	game.addVisualIn(pared, game.at(2,12))
+	game.addVisualIn(pared, game.at(3,12))
+	game.addVisualIn(pared, game.at(4,12))
+	game.addVisualIn(pared, game.at(5,12))
+	game.addVisualIn(pared, game.at(6,12))
+	game.addVisualIn(pared, game.at(7,12))
+	game.addVisualIn(pared, game.at(8,12))
+	game.addVisualIn(pared, game.at(9,12))
+	game.addVisualIn(pared, game.at(10,12))
+	game.addVisualIn(pared, game.at(11,12))
+	game.addVisualIn(pared, game.at(12,12))
+	game.addVisualIn(pared, game.at(13,12))
+	game.addVisualIn(pared, game.at(14,12))
+	game.addVisualIn(pared, game.at(15,12))
+	game.addVisualIn(pared, game.at(16,12))
+	game.addVisualIn(pared, game.at(17,12))
+	game.addVisualIn(pared, game.at(18,12))
+	game.addVisualIn(pared, game.at(19,12))
+	
+	//PARED DERECHA
+	game.addVisualIn(pared, game.at(19,13))
+	game.addVisualIn(pared, game.at(19,12))
+	game.addVisualIn(pared, game.at(19,11))
+	game.addVisualIn(pared, game.at(19,10))
+	game.addVisualIn(pared, game.at(19,9))
+	game.addVisualIn(pared, game.at(19,8))
+	game.addVisualIn(pared, game.at(19,7))
+	game.addVisualIn(pared, game.at(19,6))
+	game.addVisualIn(pared, game.at(19,5))
+	game.addVisualIn(pared, game.at(19,4))
+	game.addVisualIn(pared, game.at(19,3))
+//	game.addVisualIn(pared, game.at(19,2))
+//	game.addVisualIn(pared, game.at(19,1))
+	
+	//PARED ABAJO
+	game.addVisualIn(pared, game.at(19,0))
+	game.addVisualIn(pared, game.at(18,0))
+	game.addVisualIn(pared, game.at(17,0))
+	game.addVisualIn(pared, game.at(16,0))
+	game.addVisualIn(pared, game.at(15,0))
+	game.addVisualIn(pared, game.at(14,0))
+	game.addVisualIn(pared, game.at(13,0))
+	game.addVisualIn(pared, game.at(12,0))
+	game.addVisualIn(pared, game.at(11,0))
+	game.addVisualIn(pared, game.at(10,0))
+	game.addVisualIn(pared, game.at(9,0))
+	game.addVisualIn(pared, game.at(8,0))
+	game.addVisualIn(pared, game.at(7,0))
+	game.addVisualIn(pared, game.at(6,0))
+	game.addVisualIn(pared, game.at(5,0))
+	game.addVisualIn(pared, game.at(4,0))
+	game.addVisualIn(pared, game.at(3,0))
+	game.addVisualIn(pared, game.at(2,0))
+	game.addVisualIn(pared, game.at(1,0))
+	
+	//vida
+	game.addVisualIn(noVida, game.at(23,12))
+	game.addVisualIn(vida, game.at(22,12))
+	game.addVisualIn(vida, game.at(21,12))
+	
 	
 	var lobo1 = new Lobo(posicionInicial = game.at(9,8), direccionInicial = izquierda)
 	var lobo2 = new Lobo(posicionInicial = game.at(15,5), direccionInicial = izquierda)
-	var murcielago1 = new Murcielago(posicionInicial = game.at(5,3), direccionInicial = abajo)
+	var murcielago1 = new Murcielago(posicionInicial = game.at(15,10), direccionInicial = abajo)
 	var arquero1 = new Arquero(posicionInicial = game.at(16,3), direccionInicial = izquierda)
 	var puerta = new Puerta(position = game.at(10,3))
 	var palanca = new Palanca(position = game.at(3,10),objetoCerrado=puerta)
