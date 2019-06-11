@@ -7,7 +7,7 @@ class Enemigo {
 	var property position=game.at(0,0)
 	var property direccion=izquierda
 	const posicionInicial
-	const direccionInicial
+	const property direccionInicial
 
 	method chocarCon(algo){
 		if (algo == franky){algo.morir()}
@@ -84,11 +84,9 @@ class Murcielago inherits Enemigo{
 	method cambiarDireccion(){
 		if (direccion == abajo){
 			direccion = arriba
-	//		imagen = "tumba.gif"
 		}
 		else {
 			direccion = abajo
-	//		imagen = "wolf.gif"
 		}
 		pasos = 0
 	}
@@ -101,11 +99,13 @@ class Murcielago inherits Enemigo{
 
 class Arquero inherits Enemigo{ 
 	
-	method image() = "franky-left.png"
-	
+	method image() {
+		if (direccionInicial == izquierda) { return "franky-left.png" }
+		else return "franky-right.png"
+ 	}
 	
 	method disparar() {
-		var flecha = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = izquierda)
+		var flecha = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = self.direccionInicial())
 		flecha.agregarEnTablero()
 		game.onTick(300,"disparo de flecha",{ flecha.moverse()})
 	} 
@@ -114,7 +114,10 @@ class Arquero inherits Enemigo{
 
 class Flecha inherits Enemigo{
 	
-	method image() = "flecha-left.png"
+	method image() {
+		if (direccionInicial == izquierda) { return "flecha-left.png" }
+		else return "flecha-right.png"
+	}
 	
 	method moverse() {
 		direccion.mover(self)
@@ -125,4 +128,26 @@ class Flecha inherits Enemigo{
 		self.position(nuevaPosicion)
 	}
 	
+}
+
+class Pinche inherits Enemigo {
+	var estanArriba = false
+	var imagen = "life-out.png"
+	
+	method image() = imagen
+	
+	method subirYBajar() { game.onTick(2000, "subir y bajar", { 
+		self.movimiento()
+		imagen = "life-out.png"
+	}) 
+	}
+	
+	method movimiento() {
+		if (estanArriba) { imagen = "life-out.png" } 
+		else imagen = "life.png" 
+	}
+	
+	override method chocarCon(algo){
+		if (estanArriba) { super(algo) }
+	}
 }

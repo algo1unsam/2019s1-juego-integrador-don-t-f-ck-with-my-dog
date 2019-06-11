@@ -113,7 +113,7 @@ program DontFuckWithMyDog {
 	game.addVisualIn(pared, game.at(5,2))
 	game.addVisualIn(pared, game.at(5,3))
 	game.addVisualIn(pared, game.at(5,4))
-	game.addVisualIn(pared, game.at(5,11))
+	game.addVisualIn(pared, game.at(5,11)) 
 	
 	game.addVisualIn(pared, game.at(6,2))
 	game.addVisualIn(pared, game.at(6,3))
@@ -125,49 +125,48 @@ program DontFuckWithMyDog {
 	game.addVisualIn(pared, game.at(6,10))
 	game.addVisualIn(pared, game.at(6,11))
 	
+	game.addVisualIn(pared, game.at(7,2))
+	game.addVisualIn(pared, game.at(7,3))
 	game.addVisualIn(pared, game.at(7,7))
 	
-	game.addVisualIn(pared, game.at(8,2))
-	game.addVisualIn(pared, game.at(8,3))
-	game.addVisualIn(pared, game.at(8,4))
 	game.addVisualIn(pared, game.at(8,5))
 	game.addVisualIn(pared, game.at(8,7))
 	game.addVisualIn(pared, game.at(8,9))
 	game.addVisualIn(pared, game.at(8,10))
 	
+	game.addVisualIn(pared, game.at(9,2))
 	game.addVisualIn(pared, game.at(9,3))
 	game.addVisualIn(pared, game.at(9,4))
 	game.addVisualIn(pared, game.at(9,5))
 	game.addVisualIn(pared, game.at(9,7))
 	game.addVisualIn(pared, game.at(9,9))
-	
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 	game.addVisualIn(pared, game.at(10,3))
 	game.addVisualIn(pared, game.at(10,7))
 	game.addVisualIn(pared, game.at(10,8))
 	game.addVisualIn(pared, game.at(10,9))
 	game.addVisualIn(pared, game.at(10,11))
 	
+	game.addVisualIn(pared, game.at(11,2))
 	game.addVisualIn(pared, game.at(11,3))
 	game.addVisualIn(pared, game.at(11,5))
 	game.addVisualIn(pared, game.at(11,6))
 	game.addVisualIn(pared, game.at(11,7))
 	game.addVisualIn(pared, game.at(11,11))
-	
+
 	game.addVisualIn(pared, game.at(12,3))
-	game.addVisualIn(pared, game.at(12,5))
-	game.addVisualIn(pared, game.at(12,6))
 	game.addVisualIn(pared, game.at(12,7))
 	game.addVisualIn(pared, game.at(12,9))
 	game.addVisualIn(pared, game.at(12,10))
-	game.addVisualIn(pared, game.at(12,11))
-	
+	game.addVisualIn(pared, game.at(12,11))	
+
 	game.addVisualIn(pared, game.at(13,3))
-	game.addVisualIn(pared, game.at(13,6))
+	game.addVisualIn(pared, game.at(13,5))
 	game.addVisualIn(pared, game.at(13,7))
 	
 	game.addVisualIn(pared, game.at(14,1))
 	game.addVisualIn(pared, game.at(14,3))
-	game.addVisualIn(pared, game.at(14,6))
+	game.addVisualIn(pared, game.at(14,5))
 	game.addVisualIn(pared, game.at(14,7))
 	game.addVisualIn(pared, game.at(14,8))
 	game.addVisualIn(pared, game.at(14,9))
@@ -175,11 +174,12 @@ program DontFuckWithMyDog {
 	
 	game.addVisualIn(pared, game.at(15,1))
 	game.addVisualIn(pared, game.at(15,3))
-	game.addVisualIn(pared, game.at(15,6))
+	game.addVisualIn(pared, game.at(15,5))
 	
 	game.addVisualIn(pared, game.at(16,1))
 	game.addVisualIn(pared, game.at(16,3))
 	game.addVisualIn(pared, game.at(16,4))
+	game.addVisualIn(pared, game.at(16,5))
 	game.addVisualIn(pared, game.at(16,8))
 	game.addVisualIn(pared, game.at(16,10))
 	game.addVisualIn(pared, game.at(16,11))
@@ -206,9 +206,10 @@ program DontFuckWithMyDog {
 	var lobo1 = new Lobo(posicionInicial = game.at(9,8), direccionInicial = izquierda)
 	var lobo2 = new Lobo(posicionInicial = game.at(15,4), direccionInicial = izquierda)
 	var murcielago1 = new Murcielago(posicionInicial = game.at(15,11), direccionInicial = abajo)
-	var arquero1 = new Arquero(posicionInicial = game.at(13,1), direccionInicial = izquierda)
+	var arquero1 = new Arquero(posicionInicial = game.at(6,1), direccionInicial = derecha)
 	var puerta = new Puerta(position = game.at(19,1))
 	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
+	var pinches = new Pinche(position = game.at(2,7), posicionInicial = game.at(2,7), direccionInicial = null) 
 	
 	
 	lobo1.agregarEnTablero() 
@@ -216,11 +217,13 @@ program DontFuckWithMyDog {
 	murcielago1.agregarEnTablero()
 	arquero1.agregarEnTablero()
 	arquero1.disparar()
+	pinches.agregarEnTablero()
 	
 	lobo1.moverse()
 	lobo2.moverse()
 	murcielago1.moverse()
 	constructorTablero.agregarPalancaTablero(palanca)
+	pinches.subirYBajar()
 	game.addVisual(puerta)
 	game.addVisual(franky)
 	
