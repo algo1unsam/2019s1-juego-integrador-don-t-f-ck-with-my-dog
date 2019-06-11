@@ -72,7 +72,7 @@ class Murcielago inherits Enemigo{
 		game.onTick(200,"murcielago enemigo",{ self.avanzar() })
 	}
 	method avanzar(){
-		if (pasos < 5){
+		if (pasos < 4){
 			direccion.mover(self)
 			pasos++
 		}
@@ -118,18 +118,8 @@ class Flecha inherits Enemigo{
 	
 	method moverse() {
 		direccion.mover(self)
-		if (position.allElements().contains(pared)){
-		//if (direccion.devolverProximaPosicion(position).allElements().size()>0){
-			self.move(posicionInicial)
-		}
-		//game.whenCollideDo(pared, {pared => self.chocarCon(pared)})
+		if (position.allElements().contains(pared)){ self.move(posicionInicial) }
 	}
-	/*override method chocarCon(algo){
-		super(algo)
-		if (algo == pared){self.move(self.position(posicionInicial))}
-	}
-	* 
-	*/
 	
 	method move(nuevaPosicion) {
 		self.position(nuevaPosicion)

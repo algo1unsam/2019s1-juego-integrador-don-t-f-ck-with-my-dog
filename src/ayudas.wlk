@@ -43,15 +43,8 @@ class Puerta{
 	method cerrar(){
 		estaAbierto=false
 	}
- 	method image(){
-/*/		if (estaAbierto){
-			return "wall.png"
-		}
-		else {
-			return "franky-front.png"
-		}*/
-		return "wall.png"
-	}
+ 	method image() = "wall.png"
+ 	
 	method chocarCon(jugador){
 		if (!estaAbierto){
 		jugador.direccion().retroceder(jugador)
