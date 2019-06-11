@@ -117,15 +117,15 @@ program DontFuckWithMyDog {
 	
 	
 	//vida
-	game.addVisualIn(noVida, game.at(23,12))
-	game.addVisualIn(vida, game.at(22,12))
-	game.addVisualIn(vida, game.at(21,12))
+	game.addVisualIn(noVida, game.at(18,12))
+	game.addVisualIn(vida, game.at(17,12))
+	game.addVisualIn(vida, game.at(16,12))
 	
 	
 	var lobo1 = new Lobo(posicionInicial = game.at(9,8), direccionInicial = izquierda)
 	var lobo2 = new Lobo(posicionInicial = game.at(15,4), direccionInicial = izquierda)
 	var murcielago1 = new Murcielago(posicionInicial = game.at(16,11), direccionInicial = abajo)
-//	var arquero1 = new Arquero(posicionInicial = game.at(16,3), direccionInicial = izquierda)
+	var arquero1 = new Arquero(posicionInicial = game.at(16,3), direccionInicial = izquierda)
 	var puerta = new Puerta(position = game.at(19,1))
 	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
 	
@@ -133,12 +133,12 @@ program DontFuckWithMyDog {
 	lobo1.agregarEnTablero() 
 	lobo2.agregarEnTablero()
 	murcielago1.agregarEnTablero()
-//	arquero1.agregarEnTablero()
-//	arquero1.disparar()
+	arquero1.agregarEnTablero()
+	arquero1.disparar()
 	
 	lobo1.moverse()
 	lobo2.moverse()
-//	murcielago1.moverse()
+	murcielago1.moverse()
 	constructorTablero.agregarPalancaTablero(palanca)
 	game.addVisual(puerta)
 	game.addVisual(franky)

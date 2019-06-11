@@ -4,13 +4,13 @@ import Direcciones.*
 import constructorTablero.*
 
 class Enemigo {
-	var property position=game.at(0,0) 
+	var property position=game.at(0,0)
 	var property direccion=izquierda
 	const posicionInicial
 	const direccionInicial
 
-	method chocarCon(jugador){
-		jugador.morir()
+	method chocarCon(algo){
+		if (algo == franky){algo.morir()}
 	}
 	
 	method agregarEnTablero(){
@@ -100,19 +100,17 @@ class Murcielago inherits Enemigo{
 }
 
 class Arquero inherits Enemigo{ 
-	method image() = "flecha-left.png"
+	
+	method image() = "franky-left.png"
+	
 	
 	method disparar() {
 		var flecha = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = izquierda)
-			game.addVisual(flecha)
-		game.onTick(200,"disparo de flecha",{ 
-			
-			flecha.moverse()
-			//flecha = new Flecha(position = self.position(), direccion = izquierda)
-			//game.addVisual(flecha)
-		})
+		flecha.agregarEnTablero()
+		game.onTick(300,"disparo de flecha",{ flecha.moverse()})
 	} 
 }	
+
 
 class Flecha inherits Enemigo{
 	
@@ -120,7 +118,18 @@ class Flecha inherits Enemigo{
 	
 	method moverse() {
 		direccion.mover(self)
+		if (position.allElements().contains(pared)){
+		//if (direccion.devolverProximaPosicion(position).allElements().size()>0){
+			self.move(posicionInicial)
+		}
+		//game.whenCollideDo(pared, {pared => self.chocarCon(pared)})
 	}
+	/*override method chocarCon(algo){
+		super(algo)
+		if (algo == pared){self.move(self.position(posicionInicial))}
+	}
+	* 
+	*/
 	
 	method move(nuevaPosicion) {
 		self.position(nuevaPosicion)

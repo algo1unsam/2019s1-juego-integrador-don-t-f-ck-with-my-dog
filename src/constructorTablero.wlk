@@ -21,4 +21,13 @@ object constructorTablero {
 	method desactivarPalancas(){
 		palancas.forEach({palanca => palanca.desactivar()})
 	}
+	method constructorParedes(x,cantidadDeBloques,y){
+		var bloques=cantidadDeBloques
+		var columnaActual=y
+		if (cantidadDeBloques != 0){
+			game.addVisualIn(pared, game.at(x,y))
+			bloques--
+			columnaActual++
+		}
+	}
 }
