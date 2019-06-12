@@ -10,7 +10,7 @@ class Enemigo {
 	const property direccionInicial
 
 	method chocarCon(algo){
-		if (algo == franky){algo.morir()}
+		if (algo == franky){ algo.morir() }
 	}
 	
 	method agregarEnTablero(){
@@ -107,6 +107,7 @@ class Arquero inherits Enemigo{
 	method disparar() {
 		var flecha = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = self.direccionInicial())
 		flecha.agregarEnTablero()
+		game.hideAttributes(flecha)
 		game.onTick(300,"disparo de flecha",{ flecha.moverse()})
 	} 
 }	
@@ -132,19 +133,20 @@ class Flecha inherits Enemigo{
 
 class Pinche inherits Enemigo {
 	var estanArriba = false
-	var imagen = "life-out.png"
 	
-	method image() = imagen
+	method image() {
+		if (estanArriba) return "life.png" 
+		else return "life-out.png" 
+	}
 	
 	method subirYBajar() { game.onTick(2000, "subir y bajar", { 
 		self.movimiento()
-		imagen = "life-out.png"
 	}) 
 	}
 	
 	method movimiento() {
-		if (estanArriba) { imagen = "life-out.png" } 
-		else imagen = "life.png" 
+		if (estanArriba) { estanArriba = false }
+		else { estanArriba = true } 
 	}
 	
 	override method chocarCon(algo){

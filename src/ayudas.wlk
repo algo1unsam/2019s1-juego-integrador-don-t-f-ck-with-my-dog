@@ -32,24 +32,42 @@ class Palanca{
 		jugador.direccion().retroceder(jugador)
 	}
 }
-class Puerta{
+class Puerta {
 	var property position
-	var estaAbierto=false
+	var estaAbierto = false
 	 
 	method abrir(){
 		estaAbierto=true
 		game.removeVisual(self)
 	}
-	method cerrar(){
-		estaAbierto=false
-	}
+	method cerrar(){ estaAbierto = false }
  	method image() = "wall.png"
  	
 	method chocarCon(jugador){
-		if (!estaAbierto){
-		jugador.direccion().retroceder(jugador)
-		}
+		if (!estaAbierto){ jugador.direccion().retroceder(jugador) }
 	}
 	method esAtacado(){}
 	method esUsado(){}
 }
+
+class Gema {
+	method image() = "gema.png"
+	
+	method chocarCon(jugador){ jugador.recogerGema(self) }
+}
+
+class Vida {
+	var imagen = "life.png"
+	
+	method image() = imagen
+	
+	method vacia() { imagen = "life-out.png" }
+	
+	method llena() { imagen = "life.png" }
+}
+
+object vida1 inherits Vida{}
+
+object vida2 inherits Vida{}
+
+object vida3 inherits Vida{}
