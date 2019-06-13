@@ -10,34 +10,9 @@ object pared {
 		jugador.direccion().retroceder(jugador)
 	}
 	
-}
-//va a ser el objeto que va a ir generando los diferentes mapas, por ahora lo uso para reestablecer los elementos del tablero al morir
-object constructorTablero {
-	var property enemigosDerrotados=[]	
-	var property palancas=[]
-	const property mapas = [mapa1]
 	
-	method nuevoEnemigoDerrotado(enemigo){
-		enemigosDerrotados.add(enemigo)
-	}
-	method agregarPalancaTablero(palanca){
-		game.addVisual(palanca)
-		palancas.add(palanca)
-	}
-	method reestablecerEnemigos(){
-		enemigosDerrotados.forEach({enemigo => enemigo.agregarEnTablero()})
-	}
-	method desactivarPalancas(){
-		palancas.forEach({palanca => palanca.desactivar()})
-	}
-/*	method constructorParedes(x,cantidadDeBloques,y){
-		var bloques=cantidadDeBloques
-		var columnaActual=y
-		0 .. cantidadDeBloques.forEach({pared => game.addVisualIn(pared, game.at(x,columnaActual))	
-		columnaActual++
-		}) 
-	}*/
 }
+
 object mapa1{
 	var puerta = new Puerta(position = game.at(19,1))
 	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
@@ -48,7 +23,7 @@ object mapa1{
 	var lobo1 = new Lobo(posicionInicial = game.at(9,8), direccionInicial = izquierda)
 	var lobo2 = new Lobo(posicionInicial = game.at(15,4), direccionInicial = izquierda)
 	var murcielago1 = new Murcielago(posicionInicial = game.at(15,11), direccionInicial = abajo)
-	var arquero1 = new Arquero(posicionInicial = game.at(6,1), direccionInicial = derecha)	
+	var arquero1 = new Arquero(posicionInicial = game.at(6,1), direccionInicial = derecha,flecha=null)	
 	var pinches = new Pinche(position = game.at(2,7), posicionInicial = game.at(2,7), direccionInicial = null)
 	
 	method agregarVidas(){
@@ -100,6 +75,7 @@ object mapa1{
 	
 	method agregarParedes(){
 		//PARED IZQUIERDA
+		
 		game.addVisualIn(pared, game.at(0,0))
 		game.addVisualIn(pared, game.at(0,1))
 		game.addVisualIn(pared, game.at(0,2))
@@ -114,6 +90,7 @@ object mapa1{
 		game.addVisualIn(pared, game.at(0,11))
 		game.addVisualIn(pared, game.at(0,12))
 		
+		//constructorTablero.constructorParedes(0,12,0)
 		//PARED ARRIBA
 		game.addVisualIn(pared, game.at(1,12))
 		game.addVisualIn(pared, game.at(2,12))
@@ -285,4 +262,36 @@ object mapa1{
 	}
 }
 
-
+//va a ser el objeto que va a ir generando los diferentes mapas, por ahora lo uso para reestablecer los elementos del tablero al morir
+object constructorTablero {
+	var property enemigosDerrotados=[]	
+	var property palancas=[]
+	const property mapas = [mapa1]
+	
+	method nuevoEnemigoDerrotado(enemigo){
+		enemigosDerrotados.add(enemigo)
+	}
+	method agregarPalancaTablero(palanca){
+		game.addVisual(palanca)
+		palancas.add(palanca)
+	}
+	method reestablecerEnemigos(){
+		enemigosDerrotados.forEach({enemigo => enemigo.agregarEnTablero()})
+	}
+	method desactivarPalancas(){
+		palancas.forEach({palanca => palanca.desactivar()})
+	}
+	method cargarMapa(mapaActual){
+		mapas.get(mapaActual).agregarParedes()
+		mapas.get(mapaActual).agregarLaberinto()
+		mapas.get(mapaActual).agregarVidas()
+		mapas.get(mapaActual).agregarEnemigos()
+		mapas.get(mapaActual).agregarAyudas()
+	}
+	method constructorParedes(x,cantidadDeBloques,y){
+		var columnaActual=y
+		0 .. cantidadDeBloques.forEach({pared => game.addVisualIn(pared, game.at(x,columnaActual))	
+		columnaActual++
+		}) 
+	}
+}

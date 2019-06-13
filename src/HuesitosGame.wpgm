@@ -22,13 +22,14 @@ program DontFuckWithMyDog {
 //	var gema1 = new Gema()
 //	var gema2 = new Gema()
 //	var gema3 = new Gema()
-		
+	/*	
 	mapa1.agregarParedes()
 	mapa1.agregarLaberinto()
 	mapa1.agregarVidas()
 	mapa1.agregarAyudas()
 	mapa1.agregarEnemigos()
-
+	 */
+	 constructorTablero.cargarMapa(0)
 	//vida
 //	game.addVisualIn(vida3, game.at(18,12))
 //	game.addVisualIn(vida2, game.at(17,12))

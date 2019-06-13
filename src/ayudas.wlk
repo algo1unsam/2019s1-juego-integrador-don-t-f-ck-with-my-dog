@@ -54,6 +54,8 @@ class Gema {
 	method image() = "gema.png"
 	
 	method chocarCon(jugador){ jugador.recogerGema(self) }
+	method esAtacado(){}
+	method esUsado(){}
 }
 
 class Vida {

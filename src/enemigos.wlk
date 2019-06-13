@@ -6,6 +6,7 @@ import constructorTablero.*
 class Enemigo {
 	var property position=game.at(0,0)
 	var property direccion=izquierda
+	var pasos=0
 	const posicionInicial
 	const property direccionInicial
 
@@ -16,6 +17,7 @@ class Enemigo {
 	method agregarEnTablero(){
 		position=posicionInicial
 		direccion=direccionInicial
+		pasos=0
 		game.addVisual(self)
 	}
 	method esAtacado(){
@@ -27,7 +29,6 @@ class Enemigo {
 }
 
 class Lobo inherits Enemigo {
-	var pasos = 0
 	//wolf.gif
 	var imagen = "wolf-left.png"
 	
@@ -62,7 +63,6 @@ class Lobo inherits Enemigo {
 }
 
 class Murcielago inherits Enemigo{
-	var pasos = 0
 	var imagen = "murcielago.png"
 	var vida = 2
 	
@@ -98,17 +98,22 @@ class Murcielago inherits Enemigo{
 }
 
 class Arquero inherits Enemigo{ 
-	
+	var flecha
 	method image() {
 		if (direccionInicial == izquierda) { return "franky-left.png" }
 		else return "franky-right.png"
  	}
 	
 	method disparar() {
-		var flecha = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = self.direccionInicial())
+		flecha = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = self.direccionInicial())
 		flecha.agregarEnTablero()
 		game.hideAttributes(flecha)
 		game.onTick(300,"disparo de flecha",{ flecha.moverse()})
+	}
+	override method esAtacado(){
+		super()
+		game.removeVisual(flecha)
+		
 	} 
 }	
 
