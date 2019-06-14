@@ -75,7 +75,7 @@ object mapa1{
 	
 	method agregarParedes(){
 		//PARED IZQUIERDA
-		
+		/*
 		game.addVisualIn(pared, game.at(0,0))
 		game.addVisualIn(pared, game.at(0,1))
 		game.addVisualIn(pared, game.at(0,2))
@@ -89,9 +89,10 @@ object mapa1{
 		game.addVisualIn(pared, game.at(0,10))
 		game.addVisualIn(pared, game.at(0,11))
 		game.addVisualIn(pared, game.at(0,12))
-		
-		//constructorTablero.constructorParedes(0,12,0)
+		 */
+		constructorTablero.constructorParedesVertical(0,12,0)
 		//PARED ARRIBA
+		/* 
 		game.addVisualIn(pared, game.at(1,12))
 		game.addVisualIn(pared, game.at(2,12))
 		game.addVisualIn(pared, game.at(3,12))
@@ -111,8 +112,12 @@ object mapa1{
 		game.addVisualIn(pared, game.at(17,12))
 		game.addVisualIn(pared, game.at(18,12))
 		game.addVisualIn(pared, game.at(19,12))
-		
+		* 
+		*/
+		constructorTablero.constructorParedesHorizontal(1,19,12)
 		//PARED DERECHA
+		constructorTablero.constructorParedesVertical(19,12,2)
+		/* 
 		game.addVisualIn(pared, game.at(19,13))
 		game.addVisualIn(pared, game.at(19,12))
 		game.addVisualIn(pared, game.at(19,11))
@@ -125,9 +130,13 @@ object mapa1{
 		game.addVisualIn(pared, game.at(19,4))
 		game.addVisualIn(pared, game.at(19,3))
 		game.addVisualIn(pared, game.at(19,2))
+		* 
+		*/
 	//	game.addVisualIn(pared, game.at(19,1))
 		
 		//PARED ABAJO
+		constructorTablero.constructorParedesHorizontal(1,19,0)
+		/*
 		game.addVisualIn(pared, game.at(19,0))
 		game.addVisualIn(pared, game.at(18,0))
 		game.addVisualIn(pared, game.at(17,0))
@@ -147,18 +156,34 @@ object mapa1{
 		game.addVisualIn(pared, game.at(3,0))
 		game.addVisualIn(pared, game.at(2,0))
 		game.addVisualIn(pared, game.at(1,0))
+		*  
+		*/
 	}
 	
 	method agregarLaberinto() {
+		
+		//constructorTablero.constructorParedesHorizontal(3,1,1)
 		game.addVisualIn(pared, game.at(3,1))
 		
+		/*constructorTablero.constructorParedesVertical(1,1,3)
+		constructorTablero.constructorParedesVertical(1,1,7)
+		constructorTablero.constructorParedesVertical(1,1,8)
+		* 
+		*/
+		 
 		game.addVisualIn(pared, game.at(1,3))
 		game.addVisualIn(pared, game.at(1,7))
 		game.addVisualIn(pared, game.at(1,8))
 		
+		//constructorTablero.constructorParedesVertical(2,1,3)
+		//constructorTablero.constructorParedesVertical(2,1,5)
+		//constructorTablero.constructorParedesVertical(2,1,10)
+		 
 		game.addVisualIn(pared, game.at(2,3))
 		game.addVisualIn(pared, game.at(2,5))
 		game.addVisualIn(pared, game.at(2,10))
+		
+		//constructorTablero.constructorParedesVertical(3,6,3)
 		
 		game.addVisualIn(pared, game.at(3,3))
 		game.addVisualIn(pared, game.at(3,4))
@@ -168,29 +193,46 @@ object mapa1{
 		game.addVisualIn(pared, game.at(3,8))
 		game.addVisualIn(pared, game.at(3,9))
 		game.addVisualIn(pared, game.at(3,10))
-		
+	
+		/* 
+		constructorTablero.constructorParedesVertical(4,1,1)
+		constructorTablero.constructorParedesVertical(4,1,7)
+		constructorTablero.constructorParedesVertical(4,1,9)
+		*/
+		 
 		game.addVisualIn(pared, game.at(4,1))
 		game.addVisualIn(pared, game.at(4,7))
 		game.addVisualIn(pared, game.at(4,9))
+		//constructorTablero.constructorParedesVertical(5,4,1)
 		
 		game.addVisualIn(pared, game.at(5,1))
 		game.addVisualIn(pared, game.at(5,2))
 		game.addVisualIn(pared, game.at(5,3))
 		game.addVisualIn(pared, game.at(5,4))
+		
+		//constructorTablero.constructorParedesVertical(5,1,11)
 		game.addVisualIn(pared, game.at(5,11)) 
 		
+		//constructorTablero.constructorParedesVertical(6,5,2)
+		  
 		game.addVisualIn(pared, game.at(6,2))
 		game.addVisualIn(pared, game.at(6,3))
 		game.addVisualIn(pared, game.at(6,4))
 		game.addVisualIn(pared, game.at(6,5))
 		game.addVisualIn(pared, game.at(6,6))
 		game.addVisualIn(pared, game.at(6,7))
+		
+		//constructorTablero.constructorParedesVertical(6,3,9)
+		 
 		game.addVisualIn(pared, game.at(6,9))
 		game.addVisualIn(pared, game.at(6,10))
 		game.addVisualIn(pared, game.at(6,11))
 		
+		//constructorTablero.constructorParedesVertical(7,2,2)
+		 
 		game.addVisualIn(pared, game.at(7,2))
 		game.addVisualIn(pared, game.at(7,3))
+		
 		game.addVisualIn(pared, game.at(7,7))
 		
 		game.addVisualIn(pared, game.at(8,5))
@@ -267,6 +309,7 @@ object constructorTablero {
 	var property enemigosDerrotados=[]	
 	var property palancas=[]
 	const property mapas = [mapa1]
+	var property cantidadParedes=0
 	
 	method nuevoEnemigoDerrotado(enemigo){
 		enemigosDerrotados.add(enemigo)
@@ -288,10 +331,18 @@ object constructorTablero {
 		mapas.get(mapaActual).agregarEnemigos()
 		mapas.get(mapaActual).agregarAyudas()
 	}
-	method constructorParedes(x,cantidadDeBloques,y){
-		var columnaActual=y
-		0 .. cantidadDeBloques.forEach({pared => game.addVisualIn(pared, game.at(x,columnaActual))	
-		columnaActual++
+	method constructorParedesVertical(x,cantidadDeBloques,y){
+		(y .. y+cantidadDeBloques).forEach({n => game.addVisualIn(pared, game.at(x,n))
+		cantidadParedes++		
 		}) 
+	}
+	method constructorParedesHorizontal(x,cantidadDeBloques,y){
+		(x .. cantidadDeBloques+x).forEach({n => game.addVisualIn(pared, game.at(n,y))	
+		cantidadParedes++
+		}) 
+	}
+	method removerParedes(){
+		(0 .. cantidadParedes).forEach({n => game.removeVisual(pared)})
+		cantidadParedes=0
 	}
 }
