@@ -10,9 +10,7 @@ class Enemigo {
 	const posicionInicial
 	const property direccionInicial
 
-	method chocarCon(algo){
-		if (algo == franky){ algo.morir() }
-	}
+	method chocarCon(algo){ if (algo == franky){algo.morir()} }
 	
 	method agregarEnTablero(){
 		position=posicionInicial
@@ -20,23 +18,22 @@ class Enemigo {
 		pasos=0
 		game.addVisual(self)
 	}
+	
 	method esAtacado(){
 		//Guardo todos los enemigos que voy derrotando para reestablecerlos en caso de morir
 		constructorTablero.nuevoEnemigoDerrotado(self)
 		game.removeVisual(self)
 	}
+	
 	method esUsado(){}
 }
 
 class Lobo inherits Enemigo {
-	//wolf.gif
 	var imagen = "wolf-left.png"
 	
 	method image() = imagen 
 	
-	method moverse() {
-		game.onTick(500,"lobo enemigo",{ self.avanzar() })
-	}	
+	method moverse() { game.onTick(500, "lobo enemigo", {self.avanzar()}) }	
 	
 	method avanzar(){
 		if (pasos < 5){
@@ -45,9 +42,9 @@ class Lobo inherits Enemigo {
 		}
 		else { self.cambiarDireccion() }
 	}
-	method move(nuevaPosicion) {
-		self.position(nuevaPosicion) 
-	}
+	
+	method move(nuevaPosicion) { self.position(nuevaPosicion) }
+	
 	method cambiarDireccion(){
 		if (direccion == izquierda){
 			direccion = derecha
@@ -59,7 +56,6 @@ class Lobo inherits Enemigo {
 		}
 		pasos = 0
 	}
-	
 }
 
 class Murcielago inherits Enemigo{
@@ -68,9 +64,8 @@ class Murcielago inherits Enemigo{
 	
 	method image() = imagen
 	
-	method moverse() {
-		game.onTick(200,"murcielago enemigo",{ self.avanzar() })
-	}
+	method moverse() { game.onTick(200, "murcielago enemigo", {self.avanzar()}) }
+	
 	method avanzar(){
 		if (pasos < 4){
 			direccion.mover(self)
@@ -78,9 +73,9 @@ class Murcielago inherits Enemigo{
 		}
 		else { self.cambiarDireccion() }
 	}
-	method move(nuevaPosicion) {
-		self.position(nuevaPosicion) 
-	}
+	
+	method move(nuevaPosicion) { self.position(nuevaPosicion) }
+	
 	method cambiarDireccion(){
 		if (direccion == abajo){
 			direccion = arriba
@@ -99,21 +94,22 @@ class Murcielago inherits Enemigo{
 
 class Arquero inherits Enemigo{ 
 	var flecha
+	
 	method image() {
 		if (direccionInicial == izquierda) { return "franky-left.png" }
 		else return "franky-right.png"
  	}
 	
-	method disparar() {
+	method disparar(segs) {
 		flecha = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = self.direccionInicial())
 		flecha.agregarEnTablero()
 		game.hideAttributes(flecha)
-		game.onTick(300,"disparo de flecha",{ flecha.moverse()})
+		game.onTick(segs,"disparo de flecha",{ flecha.moverse() })
 	}
+	
 	override method esAtacado(){
 		super()
-		game.removeVisual(flecha)
-		
+		game.removeVisual(flecha)	
 	} 
 }	
 
@@ -130,9 +126,7 @@ class Flecha inherits Enemigo{
 		if (position.allElements().contains(pared)){ self.move(posicionInicial) }
 	}
 	
-	method move(nuevaPosicion) {
-		self.position(nuevaPosicion)
-	}
+	method move(nuevaPosicion) { self.position(nuevaPosicion) }
 	
 }
 
@@ -144,17 +138,20 @@ class Pinche inherits Enemigo {
 		else return "life-out.png" 
 	}
 	
-	method subirYBajar() { game.onTick(2000, "subir y bajar", { 
-		self.movimiento()
-	}) 
-	}
+	method subirYBajar() { game.onTick(2000, "subir y bajar", { self.movimiento() }) }
 	
 	method movimiento() {
 		if (estanArriba) { estanArriba = false }
 		else { estanArriba = true } 
 	}
 	
-	override method chocarCon(algo){
-		if (estanArriba) { super(algo) }
-	}
+	override method chocarCon(algo){ if (estanArriba) {super(algo)} }
+}
+
+class Agua {
+	var property position
+	
+	method image() = "wall.png"
+	
+	method chocarCon(algo){ if (algo == franky){algo.morir()} }
 }

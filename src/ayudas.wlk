@@ -9,43 +9,40 @@ class Palanca{
 	const objetoCerrado
 	
 	method image(){
-		if (estaActivo){
-			return "palanca-activada.png"
-		}
-		else {
-			return "palanca-desactivada.png"
-		}
+		if (estaActivo) return "palanca-activada.png" 
+		else return "palanca-desactivada.png" 
 	}
-	method activar(){
-		objetoCerrado.abrir()	
-	}
+	method activar(){ objetoCerrado.abrir()	}
+	
 	method desactivar(){
 		estaActivo=false
 		objetoCerrado.cerrar()	
 	}
+	
 	method esAtacado(){}
 	method esUsado(){
 		self.activar()
 		estaActivo=true
 	}
-	method chocarCon(jugador){
-		jugador.direccion().retroceder(jugador)
-	}
+	
+	method chocarCon(jugador){ jugador.direccion().retroceder(jugador)}
 }
+
 class Puerta {
 	var property position
 	var estaAbierto = false
+	
+	method image() = "wall.png"
 	 
 	method abrir(){
 		estaAbierto=true
 		game.removeVisual(self)
 	}
+	
 	method cerrar(){ estaAbierto = false }
- 	method image() = "wall.png"
  	
-	method chocarCon(jugador){
-		if (!estaAbierto){ jugador.direccion().retroceder(jugador) }
-	}
+	method chocarCon(jugador){ if (!estaAbierto){ jugador.direccion().retroceder(jugador) } }
+	
 	method esAtacado(){}
 	method esUsado(){}
 }
@@ -54,6 +51,7 @@ class Gema {
 	method image() = "gema.png"
 	
 	method chocarCon(jugador){ jugador.recogerGema(self) }
+	
 	method esAtacado(){}
 	method esUsado(){}
 }

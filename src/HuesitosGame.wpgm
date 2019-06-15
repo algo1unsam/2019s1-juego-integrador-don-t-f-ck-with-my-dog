@@ -12,65 +12,9 @@ program DontFuckWithMyDog {
 	game.width(20)
 	game.ground("ground.png")
 	
-//	var lobo1 = new Lobo(posicionInicial = game.at(9,8), direccionInicial = izquierda)
-//	var lobo2 = new Lobo(posicionInicial = game.at(15,4), direccionInicial = izquierda)
-//	var murcielago1 = new Murcielago(posicionInicial = game.at(15,11), direccionInicial = abajo)
-//	var arquero1 = new Arquero(posicionInicial = game.at(6,1), direccionInicial = derecha)
-//	var puerta = new Puerta(position = game.at(19,1))
-//	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
-//	var pinches = new Pinche(position = game.at(2,7), posicionInicial = game.at(2,7), direccionInicial = null) 
-//	var gema1 = new Gema()
-//	var gema2 = new Gema()
-//	var gema3 = new Gema()
-	/*	
-	mapa1.agregarParedes()
-	mapa1.agregarLaberinto()
-	mapa1.agregarVidas()
-	mapa1.agregarAyudas()
-	mapa1.agregarEnemigos()
-	 */
-	 constructorTablero.cargarMapa(0)
-	//vida
-//	game.addVisualIn(vida3, game.at(18,12))
-//	game.addVisualIn(vida2, game.at(17,12))
-//	game.addVisualIn(vida1, game.at(16,12))
-	
-	//gemas
-//	game.addVisualIn(gema1, game.at(18,11))
-//	game.addVisualIn(gema2, game.at(10,2))
-//	game.addVisualIn(gema3, game.at(18,6))
+	constructorTablero.cargarMapa(1) 
 
-	
-//	constructorTablero.agregarPalancaTablero(palanca)
-//	lobo1.agregarEnTablero() 
-//	lobo2.agregarEnTablero()
-//	murcielago1.agregarEnTablero()
-//	arquero1.agregarEnTablero()
-//	pinches.agregarEnTablero()
-//	game.addVisual(puerta)
-	game.addVisual(franky)
-	
-	//EsconderAtributos
-//	game.hideAttributes(vida1)
-//	game.hideAttributes(vida2)
-//	game.hideAttributes(vida3)
-//	game.hideAttributes(lobo1) 
-//	game.hideAttributes(lobo2)
-//	game.hideAttributes(murcielago1)
-//	game.hideAttributes(arquero1)
-//	game.hideAttributes(puerta)
-//	game.hideAttributes(palanca)
-//	game.hideAttributes(pinches)
-//	game.hideAttributes(gema1)
-//	game.hideAttributes(gema2)
-//	game.hideAttributes(gema3)
-	
-//	arquero1.disparar()
-//	lobo1.moverse()
-//	lobo2.moverse()
-//	murcielago1.moverse()
-//	pinches.subirYBajar()
-
+//	game.addVisual(franky)
 	
 	keyboard.up().onPressDo { franky.movimiento(arriba, "franky-back.png") }
 	keyboard.down().onPressDo { franky.movimiento(abajo, "franky-front.png") }

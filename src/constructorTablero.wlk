@@ -9,11 +9,11 @@ object pared {
 	method chocarCon(jugador){
 		jugador.direccion().retroceder(jugador)
 	}
-	
-	
 }
 
-object mapa1{
+
+object mapa1  {
+	var posicionFranky=game.at(1,1)
 	var puerta = new Puerta(position = game.at(19,1))
 	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
 	var gema1 = new Gema()
@@ -26,19 +26,7 @@ object mapa1{
 	var arquero1 = new Arquero(posicionInicial = game.at(6,1), direccionInicial = derecha,flecha=null)	
 	var pinches = new Pinche(position = game.at(2,7), posicionInicial = game.at(2,7), direccionInicial = null)
 	
-	method agregarVidas(){
-		game.addVisualIn(vida3, game.at(18,12))
-		game.addVisualIn(vida2, game.at(17,12))
-		game.addVisualIn(vida1, game.at(16,12)) 
-		
-		game.hideAttributes(vida1)
-		game.hideAttributes(vida2)
-		game.hideAttributes(vida3)
-	} 
-	
 	method agregarAyudas(){
-		game.addVisual(puerta)
-		
 		game.addVisualIn(gema1, game.at(18,11))
 		game.addVisualIn(gema2, game.at(10,2))
 		game.addVisualIn(gema3, game.at(18,6))
@@ -53,6 +41,16 @@ object mapa1{
 		game.hideAttributes(palanca)
 	}
 	
+	method agregarVidas(){
+		game.addVisualIn(vida3, game.at(18,12))
+		game.addVisualIn(vida2, game.at(17,12))
+		game.addVisualIn(vida1, game.at(16,12)) 
+		
+		game.hideAttributes(vida1)
+		game.hideAttributes(vida2)
+		game.hideAttributes(vida3)
+	}
+	
 	method agregarEnemigos(){		
 		lobo1.agregarEnTablero() 
 		lobo2.agregarEnTablero()
@@ -60,7 +58,7 @@ object mapa1{
 		arquero1.agregarEnTablero()
 		pinches.agregarEnTablero()
 		
-		arquero1.disparar()
+		arquero1.disparar(300)
 		lobo1.moverse()
 		lobo2.moverse()
 		murcielago1.moverse()
@@ -75,101 +73,27 @@ object mapa1{
 	
 	method agregarParedes(){
 		//PARED IZQUIERDA
-		/*
-		game.addVisualIn(pared, game.at(0,0))
-		game.addVisualIn(pared, game.at(0,1))
-		game.addVisualIn(pared, game.at(0,2))
-		game.addVisualIn(pared, game.at(0,3))
-		game.addVisualIn(pared, game.at(0,4))
-		game.addVisualIn(pared, game.at(0,5))
-		game.addVisualIn(pared, game.at(0,6))
-		game.addVisualIn(pared, game.at(0,7))
-		game.addVisualIn(pared, game.at(0,8))
-		game.addVisualIn(pared, game.at(0,9))
-		game.addVisualIn(pared, game.at(0,10))
-		game.addVisualIn(pared, game.at(0,11))
-		game.addVisualIn(pared, game.at(0,12))
-		 */
 		constructorTablero.constructorParedesVertical(0,12,0)
+		
 		//PARED ARRIBA
-		/* 
-		game.addVisualIn(pared, game.at(1,12))
-		game.addVisualIn(pared, game.at(2,12))
-		game.addVisualIn(pared, game.at(3,12))
-		game.addVisualIn(pared, game.at(4,12))
-		game.addVisualIn(pared, game.at(5,12))
-		game.addVisualIn(pared, game.at(6,12))
-		game.addVisualIn(pared, game.at(7,12))
-		game.addVisualIn(pared, game.at(8,12))
-		game.addVisualIn(pared, game.at(9,12))
-		game.addVisualIn(pared, game.at(10,12))
-		game.addVisualIn(pared, game.at(11,12))
-		game.addVisualIn(pared, game.at(12,12))
-		game.addVisualIn(pared, game.at(13,12))
-		game.addVisualIn(pared, game.at(14,12))
-		game.addVisualIn(pared, game.at(15,12))
-		game.addVisualIn(pared, game.at(16,12))
-		game.addVisualIn(pared, game.at(17,12))
-		game.addVisualIn(pared, game.at(18,12))
-		game.addVisualIn(pared, game.at(19,12))
-		* 
-		*/
 		constructorTablero.constructorParedesHorizontal(1,19,12)
+		
 		//PARED DERECHA
-		constructorTablero.constructorParedesVertical(19,12,2)
-		/* 
-		game.addVisualIn(pared, game.at(19,13))
-		game.addVisualIn(pared, game.at(19,12))
-		game.addVisualIn(pared, game.at(19,11))
-		game.addVisualIn(pared, game.at(19,10))
-		game.addVisualIn(pared, game.at(19,9))
-		game.addVisualIn(pared, game.at(19,8))
-		game.addVisualIn(pared, game.at(19,7))
-		game.addVisualIn(pared, game.at(19,6))
-		game.addVisualIn(pared, game.at(19,5))
-		game.addVisualIn(pared, game.at(19,4))
-		game.addVisualIn(pared, game.at(19,3))
-		game.addVisualIn(pared, game.at(19,2))
-		* 
-		*/
-	//	game.addVisualIn(pared, game.at(19,1))
+		constructorTablero.constructorParedesVertical(19,11,2)
 		
 		//PARED ABAJO
 		constructorTablero.constructorParedesHorizontal(1,19,0)
-		/*
-		game.addVisualIn(pared, game.at(19,0))
-		game.addVisualIn(pared, game.at(18,0))
-		game.addVisualIn(pared, game.at(17,0))
-		game.addVisualIn(pared, game.at(16,0))
-		game.addVisualIn(pared, game.at(15,0))
-		game.addVisualIn(pared, game.at(14,0))
-		game.addVisualIn(pared, game.at(13,0))
-		game.addVisualIn(pared, game.at(12,0))
-		game.addVisualIn(pared, game.at(11,0))
-		game.addVisualIn(pared, game.at(10,0))
-		game.addVisualIn(pared, game.at(9,0))
-		game.addVisualIn(pared, game.at(8,0))
-		game.addVisualIn(pared, game.at(7,0))
-		game.addVisualIn(pared, game.at(6,0))
-		game.addVisualIn(pared, game.at(5,0))
-		game.addVisualIn(pared, game.at(4,0))
-		game.addVisualIn(pared, game.at(3,0))
-		game.addVisualIn(pared, game.at(2,0))
-		game.addVisualIn(pared, game.at(1,0))
-		*  
-		*/
 	}
 	
 	method agregarLaberinto() {
 		
-		//constructorTablero.constructorParedesHorizontal(3,1,1)
-		game.addVisualIn(pared, game.at(3,1))
+		constructorTablero.constructorParedesHorizontal(3,1,1)
+		//game.addVisualIn(pared, game.at(3,1))
 		
-		/*constructorTablero.constructorParedesVertical(1,1,3)
-		constructorTablero.constructorParedesVertical(1,1,7)
-		constructorTablero.constructorParedesVertical(1,1,8)
-		* 
-		*/
+		//constructorTablero.constructorParedesVertical(1,1,3)
+		//constructorTablero.constructorParedesVertical(1,1,7)
+		//constructorTablero.constructorParedesVertical(1,1,8)
+		
 		 
 		game.addVisualIn(pared, game.at(1,3))
 		game.addVisualIn(pared, game.at(1,7))
@@ -302,45 +226,110 @@ object mapa1{
 		game.addVisualIn(pared, game.at(18,9))
 		game.addVisualIn(pared, game.at(18,10))
 	}
+	
+	method agregarFranky() { 
+		game.addVisual(franky)
+		franky.move(posicionFranky)
+	}
 }
 
-//va a ser el objeto que va a ir generando los diferentes mapas, por ahora lo uso para reestablecer los elementos del tablero al morir
+object mapa2{
+	//var contadorDeAgua 	
+	var posicionFranky=game.at(0,1)
+	var arquero1 = new Arquero(posicionInicial = game.at(18,1), direccionInicial = izquierda, flecha = null)
+	var arquero2 = new Arquero(posicionInicial = game.at(18,2), direccionInicial = izquierda, flecha = null)
+	var arquero3 = new Arquero(posicionInicial = game.at(4,11), direccionInicial = abajo, flecha = null)
+	var arquero4 = new Arquero(posicionInicial = game.at(10,8), direccionInicial = arriba, flecha = null)
+	var arquero5 = new Arquero(posicionInicial = game.at(10,7), direccionInicial = abajo, flecha = null)
+	var arquero6 = new Arquero(posicionInicial = game.at(7,7), direccionInicial = arriba, flecha = null)
+	var arquero7 = new Arquero(posicionInicial = game.at(15,11), direccionInicial = abajo, flecha = null)
+	
+	method agregarFranky(){
+		game.addVisual(franky)
+		franky.move(posicionFranky)
+	}
+	
+	method agregarVidas(){}
+	
+	method agregarLaberinto(){}
+	
+	method agregarEnemigos() {
+		arquero1.agregarEnTablero()
+		arquero2.agregarEnTablero()
+		arquero3.agregarEnTablero()
+		arquero4.agregarEnTablero()
+		arquero5.agregarEnTablero()
+		arquero6.agregarEnTablero()
+		arquero7.agregarEnTablero()
+		
+		arquero1.disparar(300)
+		arquero2.disparar(400)
+		arquero3.disparar(300)
+		arquero4.disparar(500)
+		arquero5.disparar(400)
+		arquero6.disparar(400)
+		arquero7.disparar(500)
+	}
+	
+	method agregarAyudas(){}
+	
+	method agregarParedes(){
+		//PARED IZQUIERDA
+		constructorTablero.constructorParedesVertical(0,4,1)
+		constructorTablero.constructorParedesVertical(0,4,7)
+		
+		//PARED ARRIBA
+		constructorTablero.constructorParedesHorizontal(0,19,12)
+		
+		//PARED DERECHA
+		constructorTablero.constructorParedesVertical(19,12,1)
+		
+		//PARED ABAJO
+		constructorTablero.constructorParedesHorizontal(0,15,0)
+		constructorTablero.constructorParedesHorizontal(17,2,0)
+	}
+}
+
+//va a ser el objeto que va a ir generando los diferentes mapas
+// por ahora lo uso para reestablecer los elementos del tablero al morir
 object constructorTablero {
 	var property enemigosDerrotados=[]	
 	var property palancas=[]
-	const property mapas = [mapa1]
+	const property mapas = [mapa1, mapa2]
 	var property cantidadParedes=0
 	
-	method nuevoEnemigoDerrotado(enemigo){
-		enemigosDerrotados.add(enemigo)
-	}
+	method nuevoEnemigoDerrotado(enemigo){ enemigosDerrotados.add(enemigo) }
+	
 	method agregarPalancaTablero(palanca){
 		game.addVisual(palanca)
 		palancas.add(palanca)
 	}
-	method reestablecerEnemigos(){
-		enemigosDerrotados.forEach({enemigo => enemigo.agregarEnTablero()})
-	}
-	method desactivarPalancas(){
-		palancas.forEach({palanca => palanca.desactivar()})
-	}
+	
+	method reestablecerEnemigos(){ enemigosDerrotados.forEach({enemigo => enemigo.agregarEnTablero()}) }
+	
+	method desactivarPalancas(){ palancas.forEach({palanca => palanca.desactivar()}) }
+	
 	method cargarMapa(mapaActual){
 		mapas.get(mapaActual).agregarParedes()
 		mapas.get(mapaActual).agregarLaberinto()
 		mapas.get(mapaActual).agregarVidas()
 		mapas.get(mapaActual).agregarEnemigos()
 		mapas.get(mapaActual).agregarAyudas()
+		mapas.get(mapaActual).agregarFranky()
 	}
+	
 	method constructorParedesVertical(x,cantidadDeBloques,y){
 		(y .. y+cantidadDeBloques).forEach({n => game.addVisualIn(pared, game.at(x,n))
 		cantidadParedes++		
 		}) 
 	}
+	
 	method constructorParedesHorizontal(x,cantidadDeBloques,y){
 		(x .. cantidadDeBloques+x).forEach({n => game.addVisualIn(pared, game.at(n,y))	
 		cantidadParedes++
 		}) 
 	}
+	
 	method removerParedes(){
 		(0 .. cantidadParedes).forEach({n => game.removeVisual(pared)})
 		cantidadParedes=0
