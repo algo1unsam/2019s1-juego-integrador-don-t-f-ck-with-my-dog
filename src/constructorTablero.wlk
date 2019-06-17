@@ -201,7 +201,7 @@ object mapa2{
 	method agregarLaberinto(){
 		
 		constructorTablero.constructorHorizontal(1,6,5,agua)
-		constructorTablero.constructorHorizontal(1,6,4,agua)
+		constructorTablero.constructorHorizontal(3,6,3,agua)
 		
 		constructorTablero.constructorHorizontal(1,4,7,agua)
 		constructorTablero.constructorHorizontal(1,4,8,agua)
@@ -225,6 +225,10 @@ object mapa2{
 		constructorTablero.constructorHorizontal(7,10,6,agua)
 		constructorTablero.constructorHorizontal(9,10,4,agua)
 		constructorTablero.constructorHorizontal(9,10,3,agua)
+		
+		constructorTablero.constructorHorizontal(3,1,2,agua)
+		constructorTablero.constructorHorizontal(7,1,1,agua)
+		constructorTablero.constructorHorizontal(11,1,2,agua)
 	}
 	
 	method agregarEnemigos() {
