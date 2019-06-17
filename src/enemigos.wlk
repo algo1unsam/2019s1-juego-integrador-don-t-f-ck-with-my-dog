@@ -153,7 +153,7 @@ class Pinche inherits Enemigo {
 object agua {
 	method image() = "agua.jpg"
 	
-	method chocarCon(algo){ if (algo == franky){algo.morir()} }
+	method chocarCon(algo){ if (algo == franky){ algo.morir()} }
 	method esAtacado(){}
 	method esUsado(){}
 }

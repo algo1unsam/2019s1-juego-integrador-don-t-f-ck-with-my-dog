@@ -11,10 +11,9 @@ object pared {
 	}
 }
 
-
 object mapa1  {
-	var  property posicionFranky=game.at(1,1)
-	var property posicionFinalFranky=game.at(19,1)
+	var  property posicionFranky = game.at(1,1)
+	var property posicionFinalFranky = game.at(19,1)
 	var puerta = new Puerta(position = game.at(19,1))
 	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
 	var gema1 = new Gema()
@@ -86,7 +85,7 @@ object mapa1  {
 		constructorTablero.constructorHorizontal(1,19,0,pared)
 	}
 	method removerLaberinto(cantidadParedes){
-		(0 .. cantidadParedes-1).forEach({n => game.removeVisual(pared)})
+		(0 .. cantidadParedes - 1).forEach({n => game.removeVisual(pared)})
 	}
 	
 	method agregarLaberinto() {
@@ -171,8 +170,8 @@ object mapa1  {
 
 object mapa2{
 	//var contadorDeAgua 	
-	var property posicionFranky=game.at(0,6)
-	var property posicionFinalFranky=game.at(16,0)
+	var property posicionFranky = game.at(0,6)
+	var property posicionFinalFranky = game.at(16,0)
 	var arquero1 = new Arquero(posicionInicial = game.at(18,1), direccionInicial = izquierda, flecha = null)
 	var arquero2 = new Arquero(posicionInicial = game.at(18,2), direccionInicial = izquierda, flecha = null)
 	var arquero3 = new Arquero(posicionInicial = game.at(4,11), direccionInicial = abajo, flecha = null)
@@ -333,7 +332,11 @@ object constructorTablero {
 
 
 	//Cuando Franky muere
-	method reestablecerEnemigos(){ enemigosDerrotados.forEach({enemigo => enemigo.agregarEnTablero()}) }
+	method reestablecerEnemigos(){ 
+		if (enemigosDerrotados.size() > 0) { enemigosDerrotados.forEach{enemigo => enemigo.agregarEnTablero()} }
+	}
 	
-	method desactivarPalancas(){ palancas.forEach({palanca => palanca.desactivar()}) }
+	method desactivarPalancas(){ 
+		if (palancas.size() > 0) { palancas.forEach{palanca => palanca.desactivar()} }
+	}
 }
