@@ -30,7 +30,7 @@ object franky {
 	
 	method recogerGema(unaGema){
 		gemasAcumuladas.add(unaGema)
-		constructorTablero.borrarElementoEnTablero(unaGema)
+		game.removeVisual(unaGema)
 		
 		if (gemasAcumuladas.size() == 3) {
 			vida ++		

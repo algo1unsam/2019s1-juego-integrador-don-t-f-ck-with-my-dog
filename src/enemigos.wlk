@@ -17,13 +17,12 @@ class Enemigo {
 		direccion=direccionInicial
 		pasos=0
 		game.addVisual(self)
-		constructorTablero.nuevoElementoEnTablero(self)
 	}
 	
 	method esAtacado(){
 		//Guardo todos los enemigos que voy derrotando para reestablecerlos en caso de morir
 		constructorTablero.nuevoEnemigoDerrotado(self)
-		constructorTablero.borrarElementoEnTablero(self)
+		game.removeVisual(self)
 	}
 	
 	method esUsado(){}
@@ -61,7 +60,7 @@ class Lobo inherits Enemigo {
 
 class Murcielago inherits Enemigo{
 	var imagen = "murcielago.png"
-	var vida = 2
+	//var vida = 2
 	
 	method image() = imagen
 	
@@ -75,6 +74,7 @@ class Murcielago inherits Enemigo{
 		else { self.cambiarDireccion() }
 	}
 	
+	
 	method move(nuevaPosicion) { self.position(nuevaPosicion) }
 	
 	method cambiarDireccion(){
@@ -86,11 +86,12 @@ class Murcielago inherits Enemigo{
 		}
 		pasos = 0
 	}
-	
+	/* 
 	override method esAtacado() {
 		vida --
 		if (vida == 0) { super() }
 	}
+	*/
 }
 
 class Arquero inherits Enemigo{ 
@@ -110,7 +111,7 @@ class Arquero inherits Enemigo{
 	
 	override method esAtacado(){
 		super()
-		constructorTablero.borrarElementoEnTablero(flecha)	
+		game.removeVisual(flecha)	
 	} 
 }	
 
@@ -149,10 +150,12 @@ class Pinche inherits Enemigo {
 	override method chocarCon(algo){ if (estanArriba) {super(algo)} }
 }
 
-class Agua {
+object agua {
 	var property position
 	
 	method image() = "wall.png"
 	
 	method chocarCon(algo){ if (algo == franky){algo.morir()} }
+	method esAtacado(){}
+	method esUsado(){}
 }
