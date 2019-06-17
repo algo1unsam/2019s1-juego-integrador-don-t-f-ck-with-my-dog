@@ -17,12 +17,13 @@ class Enemigo {
 		direccion=direccionInicial
 		pasos=0
 		game.addVisual(self)
+		constructorTablero.nuevoElementoEnTablero(self)
 	}
 	
 	method esAtacado(){
 		//Guardo todos los enemigos que voy derrotando para reestablecerlos en caso de morir
 		constructorTablero.nuevoEnemigoDerrotado(self)
-		game.removeVisual(self)
+		constructorTablero.borrarElementoEnTablero(self)
 	}
 	
 	method esUsado(){}
@@ -109,7 +110,7 @@ class Arquero inherits Enemigo{
 	
 	override method esAtacado(){
 		super()
-		game.removeVisual(flecha)	
+		constructorTablero.borrarElementoEnTablero(flecha)	
 	} 
 }	
 

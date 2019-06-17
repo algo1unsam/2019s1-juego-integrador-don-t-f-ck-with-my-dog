@@ -12,7 +12,7 @@ program DontFuckWithMyDog {
 	game.width(20)
 	game.ground("ground.png")
 	
-	constructorTablero.cargarMapa(1) 
+	constructorTablero.cargarMapa() 
 
 //	game.addVisual(franky)
 	

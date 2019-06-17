@@ -39,7 +39,10 @@ class Puerta {
 		game.removeVisual(self)
 	}
 	
-	method cerrar(){ estaAbierto = false }
+	method cerrar(){ 
+		estaAbierto = false
+		game.addVisual(self)
+	}
  	
 	method chocarCon(jugador){ if (!estaAbierto){ jugador.direccion().retroceder(jugador) } }
 	

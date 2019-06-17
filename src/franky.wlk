@@ -6,7 +6,7 @@ import ayudas.*
 object franky {
 	var property position = game.at(0,0)
 	var property direccion = derecha
-	var imagen = "franky-right.png" 
+	var property imagen = "franky-right.png" 
 	var vida = 3
 	var gemasAcumuladas = []
 	var corazonesAcumulados = [vida1,vida2,vida3]
@@ -15,7 +15,7 @@ object franky {
 	
 	method move(nuevaPosicion) { 
 		self.position(nuevaPosicion)
-		if (nuevaPosicion == game.at(1,19)) { constructorTablero.cargarMapa(1) }
+		if (constructorTablero.llegoAPosicionFinal(nuevaPosicion)) { constructorTablero.pasarDeNivel() }
 	}
 	
 	method movimiento(direccionTecla, imagenDireccion){
@@ -30,7 +30,7 @@ object franky {
 	
 	method recogerGema(unaGema){
 		gemasAcumuladas.add(unaGema)
-		game.removeVisual(unaGema)
+		constructorTablero.borrarElementoEnTablero(unaGema)
 		
 		if (gemasAcumuladas.size() == 3) {
 			vida ++		
@@ -41,7 +41,7 @@ object franky {
 	}
 	
 	method morir(){
-		position = game.at(1,1)
+		position = constructorTablero.posicionInicialFranky()
 		//Al morir tiene que dejar el tablero como iniciado el juego por eso llamo a estos dos métodos
 		constructorTablero.reestablecerEnemigos()
 		constructorTablero.desactivarPalancas()
