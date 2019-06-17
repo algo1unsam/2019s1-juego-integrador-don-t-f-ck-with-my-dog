@@ -20,7 +20,7 @@ program DontFuckWithMyDog {
 	keyboard.down().onPressDo { franky.movimiento(abajo, "franky-front.png") }
 	keyboard.left().onPressDo { franky.movimiento(izquierda, "franky-left.png")}
 	keyboard.right().onPressDo { franky.movimiento(derecha, "franky-right.png") }
-	keyboard.space().onPressDo { franky.atacar () }
+	keyboard.space().onPressDo { franky.atacar() }
 	keyboard.a().onPressDo { franky.activar() }
 	game.whenCollideDo(franky, {enemigo => enemigo.chocarCon(franky)})
 	

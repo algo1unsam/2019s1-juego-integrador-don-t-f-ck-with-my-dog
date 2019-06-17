@@ -54,8 +54,10 @@ object franky {
 	method activar(){
 		//devuelve la siguiente posicion de la direccion actual del jugador
 		// luego activa todos los elementos en dicha posicion
-		var posicionObjeto=direccion.devolverProximaPosicion(self.position())
-		posicionObjeto.allElements().forEach({objecto => objecto.esUsado()})
+			var posicionObjeto=direccion.devolverProximaPosicion(self.position())
+		if (not posicionObjeto.allElements().contains(pared)){
+			posicionObjeto.allElements().forEach({objeto => objeto.esUsado()})
+		}
 	}
 	
 	method atacar(){
