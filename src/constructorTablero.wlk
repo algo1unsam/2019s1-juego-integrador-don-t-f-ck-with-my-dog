@@ -179,9 +179,16 @@ object mapa2{
 	var arquero5 = new Arquero(posicionInicial = game.at(10,7), direccionInicial = abajo, flecha = null)
 	var arquero6 = new Arquero(posicionInicial = game.at(8,7), direccionInicial = arriba, flecha = null)
 	var arquero7 = new Arquero(posicionInicial = game.at(15,11), direccionInicial = abajo, flecha = null)
+	var pinche1 = new Pinche(posicionInicial = game.at(6,6), direccionInicial = null)
+	var pinche2 = new Pinche(posicionInicial = game.at(7,2), direccionInicial = null)
+	var pinche3 = new Pinche(posicionInicial = game.at(12,1), direccionInicial = null)
+	var murcielago1 = new Murcielago(posicionInicial = game.at(12,7), direccionInicial = arriba)
+	var lobo1 = new Lobo(posicionInicial = game.at(13,5), direccionInicial = izquierda)
+	var lobo2 = new Lobo(posicionInicial = game.at(18,5), direccionInicial = izquierda)
 	
 	method agregarFranky(){
-		game.addVisualCharacter(franky)
+		game.addVisual(franky)
+		//game.addVisualCharacter(franky)
 		franky.position(posicionFranky)
 	}
 	
@@ -236,6 +243,12 @@ object mapa2{
 		arquero5.agregarEnTablero()
 		arquero6.agregarEnTablero()
 		arquero7.agregarEnTablero()
+		pinche1.agregarEnTablero()
+		pinche2.agregarEnTablero()
+		pinche3.agregarEnTablero()
+		murcielago1.agregarEnTablero()
+		lobo1.agregarEnTablero()
+		lobo2.agregarEnTablero()
 		
 		arquero1.disparar(300)
 		arquero2.disparar(400)
@@ -244,6 +257,9 @@ object mapa2{
 		arquero5.disparar(400)
 		arquero6.disparar(400)
 		arquero7.disparar(500)
+		pinche1.subirYBajar()
+		pinche2.subirYBajar()
+		pinche3.subirYBajar()
 		
 		game.hideAttributes(arquero1)
 		game.hideAttributes(arquero2)
@@ -252,6 +268,13 @@ object mapa2{
 		game.hideAttributes(arquero5)
 		game.hideAttributes(arquero6)
 		game.hideAttributes(arquero7)
+		game.hideAttributes(pinche1)
+		game.hideAttributes(pinche2)
+		game.hideAttributes(pinche3)
+		game.hideAttributes(murcielago1)
+		murcielago1.moverse()
+		lobo1.moverse()
+		lobo2.moverse()
 	}
 	
 	method agregarAyudas(){}
@@ -280,7 +303,7 @@ object constructorTablero {
 	var property palancas=[]
 	const property mapas = [mapa1, mapa2]
 	var property cantidadParedes=0
-	var property nroMapaActual=0
+	var property nroMapaActual=1
 	
 	method posicionInicialFranky() = mapas.get(nroMapaActual).posicionFranky()
 	
