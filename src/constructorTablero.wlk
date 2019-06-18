@@ -275,7 +275,7 @@ object constructorTablero {
 	var property palancas=[]
 	const property mapas = [mapa1, mapa2]
 	var property cantidadParedes=0
-	var property nroMapaActual=1
+	var property nroMapaActual=0
 	
 	method nuevoEnemigoDerrotado(enemigo){ enemigosDerrotados.add(enemigo) }
 	
