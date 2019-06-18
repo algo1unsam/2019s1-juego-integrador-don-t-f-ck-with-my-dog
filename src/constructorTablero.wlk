@@ -11,10 +11,9 @@ object pared {
 	}
 }
 
-
 object mapa1  {
-	var  property posicionFranky=game.at(1,1)
-	var property posicionFinalFranky=game.at(19,1)
+	var  property posicionFranky = game.at(1,1)
+	var property posicionFinalFranky = game.at(19,1)
 	var puerta = new Puerta(position = game.at(19,1))
 	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
 	var gema1 = new Gema()
@@ -86,7 +85,7 @@ object mapa1  {
 		constructorTablero.constructorHorizontal(1,19,0,pared)
 	}
 	method removerLaberinto(cantidadParedes){
-		(0 .. cantidadParedes-1).forEach({n => game.removeVisual(pared)})
+		(0 .. cantidadParedes - 1).forEach({n => game.removeVisual(pared)})
 	}
 	
 	method agregarLaberinto() {
@@ -171,8 +170,8 @@ object mapa1  {
 
 object mapa2{
 	//var contadorDeAgua 	
-	var property posicionFranky=game.at(0,6)
-	var property posicionFinalFranky=game.at(19,1)
+	var property posicionFranky = game.at(0,6)
+	var property posicionFinalFranky = game.at(16,0)
 	var arquero1 = new Arquero(posicionInicial = game.at(18,1), direccionInicial = izquierda, flecha = null)
 	var arquero2 = new Arquero(posicionInicial = game.at(18,2), direccionInicial = izquierda, flecha = null)
 	var arquero3 = new Arquero(posicionInicial = game.at(4,11), direccionInicial = abajo, flecha = null)
@@ -182,10 +181,8 @@ object mapa2{
 	var arquero7 = new Arquero(posicionInicial = game.at(15,11), direccionInicial = abajo, flecha = null)
 	
 	method agregarFranky(){
-		game.addVisual(franky)
-		franky.move(posicionFranky)
-		franky.imagen("franky-right.png")
-		franky.direccion(izquierda)
+		game.addVisualCharacter(franky)
+		franky.position(posicionFranky)
 	}
 	
 	method agregarVidas(){
@@ -247,6 +244,14 @@ object mapa2{
 		arquero5.disparar(400)
 		arquero6.disparar(400)
 		arquero7.disparar(500)
+		
+		game.hideAttributes(arquero1)
+		game.hideAttributes(arquero2)
+		game.hideAttributes(arquero3)
+		game.hideAttributes(arquero4)
+		game.hideAttributes(arquero5)
+		game.hideAttributes(arquero6)
+		game.hideAttributes(arquero7)
 	}
 	
 	method agregarAyudas(){}
@@ -277,16 +282,7 @@ object constructorTablero {
 	var property cantidadParedes=0
 	var property nroMapaActual=0
 	
-	method nuevoEnemigoDerrotado(enemigo){ enemigosDerrotados.add(enemigo) }
-	
-	method agregarPalancaTablero(palanca){
-		game.addVisual(palanca)
-		palancas.add(palanca)
-	}
-	
-	method reestablecerEnemigos(){ enemigosDerrotados.forEach({enemigo => enemigo.agregarEnTablero()}) }
-	
-	method desactivarPalancas(){ palancas.forEach({palanca => palanca.desactivar()}) }
+	method posicionInicialFranky() = mapas.get(nroMapaActual).posicionFranky()
 	
 	method cargarMapa(){
 		mapas.get(nroMapaActual).agregarParedes()
@@ -295,11 +291,6 @@ object constructorTablero {
 		mapas.get(nroMapaActual).agregarEnemigos()
 		mapas.get(nroMapaActual).agregarAyudas()
 		mapas.get(nroMapaActual).agregarFranky()
-	}
-	method pasarDeNivel(){
-		self.borrarMapa()
-		nroMapaActual++
-		self.cargarMapa()
 	}
 	
 	method constructorVertical(x,cantidadDeBloques,y,algo){
@@ -313,18 +304,39 @@ object constructorTablero {
 		cantidadParedes++
 		}) 
 	}
-	method posicionInicialFranky(){
-		return mapas.get(nroMapaActual).posicionFranky()
+	
+	method agregarPalancaTablero(palanca){
+		game.addVisual(palanca)
+		palancas.add(palanca)
 	}
+	
+	method nuevoEnemigoDerrotado(enemigo){ enemigosDerrotados.add(enemigo) }
+	
+	
+	//Cuando Franky pasa de nivel
+	method llegoAPosicionFinal(posicion) = posicion == mapas.get(nroMapaActual).posicionFinalFranky()
+	
+	method pasarDeNivel(){
+		self.borrarMapa()
+		nroMapaActual++
+		self.cargarMapa()
+	}
+	
 	method borrarMapa(){
 		mapas.get(nroMapaActual).removerLaberinto(cantidadParedes)
 		cantidadParedes=0
 		self.borrarElementosDeTablero()
 	}
-	method llegoAPosicionFinal(posicion){
-		return posicion == mapas.get(nroMapaActual).posicionFinalFranky()
+	
+	method borrarElementosDeTablero(){ game.clear() }
+
+
+	//Cuando Franky muere
+	method reestablecerEnemigos(){ 
+		if (enemigosDerrotados.size() > 0) { enemigosDerrotados.forEach{enemigo => enemigo.agregarEnTablero()} }
 	}
-	method borrarElementosDeTablero(){
-		game.clear()
-		}
+	
+	method desactivarPalancas(){ 
+		if (palancas.size() > 0) { palancas.forEach{palanca => palanca.desactivar()} }
+	}
 }

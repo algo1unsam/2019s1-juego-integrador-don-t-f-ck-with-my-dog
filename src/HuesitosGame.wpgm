@@ -13,17 +13,20 @@ program DontFuckWithMyDog {
 	game.ground("ground.png")
 	
 	constructorTablero.cargarMapa() 
-
-//	game.addVisual(franky)
 	
+	//MOVIMIENTOS DEL PERSONAJE
 	keyboard.up().onPressDo { franky.movimiento(arriba, "franky-back.png") }
 	keyboard.down().onPressDo { franky.movimiento(abajo, "franky-front.png") }
 	keyboard.left().onPressDo { franky.movimiento(izquierda, "franky-left.png")}
 	keyboard.right().onPressDo { franky.movimiento(derecha, "franky-right.png") }
-	keyboard.space().onPressDo { franky.atacar () }
-	keyboard.a().onPressDo { franky.activar() }
-	game.whenCollideDo(franky, {enemigo => enemigo.chocarCon(franky)})
 	
+	//ACCIONES DEL PERSONAJE
+	keyboard.space().onPressDo { franky.atacar() }
+	keyboard.a().onPressDo { franky.activar() }
+	
+	//COLISIONES
+	game.whenCollideDo(franky, {enemigo => enemigo.chocarCon(franky)})
+	game.whenCollideDo(franky, {agua => agua.chocarCon(franky)})
 	
 	game.start()
 } 

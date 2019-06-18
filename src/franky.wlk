@@ -10,6 +10,7 @@ object franky {
 	var vida = 3
 	var gemasAcumuladas = []
 	var corazonesAcumulados = [vida1,vida2,vida3]
+	var cant = 0
 	
 	method image() = imagen 
 	
@@ -29,15 +30,27 @@ object franky {
 	}
 	
 	method recogerGema(unaGema){
-		gemasAcumuladas.add(unaGema)
-		game.removeVisual(unaGema)
+		self.acumularGema(unaGema)
+		self.gemaAcumuladaAlTablero(unaGema)
 		
 		if (gemasAcumuladas.size() == 3) {
-			vida ++		
+			vida ++	
+			cant = 3	
 			corazonesAcumulados.get(vida-1).llena()
-			
-			if (vida > 3){ vida = 3 }
-		}
+			if (vida > 3){ 
+				vida = 3
+			}
+		}	
+	}
+	
+	method acumularGema(unaGema){
+		gemasAcumuladas.add(unaGema)
+		game.removeVisual(unaGema)
+	}
+	
+	method gemaAcumuladaAlTablero(unaGema) { 
+		cant++
+		game.addVisualIn(unaGema, game.at(cant,12))
 	}
 	
 	method morir(){
@@ -47,15 +60,17 @@ object franky {
 		constructorTablero.desactivarPalancas()
 		vida --
 		if (vida == 2) { vida3.vacia() }
-		if (vida == 1) { vida2.vacia() }
+		if (vida == 1) { vida2.vacia() } 
 		if (vida == 0) { game.stop() }
 	}
 	
 	method activar(){
 		//devuelve la siguiente posicion de la direccion actual del jugador
 		// luego activa todos los elementos en dicha posicion
-		var posicionObjeto=direccion.devolverProximaPosicion(self.position())
-		posicionObjeto.allElements().forEach({objecto => objecto.esUsado()})
+			var posicionObjeto=direccion.devolverProximaPosicion(self.position())
+		if (not posicionObjeto.allElements().contains(pared)){
+			posicionObjeto.allElements().forEach({objeto => objeto.esUsado()})
+		}
 	}
 	
 	method atacar(){
