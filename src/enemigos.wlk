@@ -190,6 +190,16 @@ class Pinche inherits Enemigo {
 	override method chocarCon(algo){ if (estanArriba) {super(algo)} }
 }
 
+class PinchesEnPared inherits Enemigo {
+
+	method image() {
+		if (direccionInicial == arriba) return "ground-with-spikes-up.png"
+		if (direccionInicial == abajo) return "ground-with-spikes-down.png"
+		if (direccionInicial == izquierda) return "ground-with-spikes-left.png"
+		else return "ground-with-spikes-right.png"
+	}
+}
+
 object agua {
 	method image() = "agua.jpg"
 	

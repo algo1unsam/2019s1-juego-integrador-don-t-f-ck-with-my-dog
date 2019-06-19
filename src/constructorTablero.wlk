@@ -116,6 +116,11 @@ object mapa1  {
 	var murcielago1 = new Murcielago(posicionInicial = game.at(15,11), direccionInicial = abajo)
 	var arquero1 = new Arquero(posicionInicial = game.at(6,1), direccionInicial = derecha,arma=null)	
 	var pinches = new Pinche(position = game.at(2,7), posicionInicial = game.at(2,7), direccionInicial = null)
+	var pinchesPared1 = new PinchesEnPared(posicionInicial = game.at(4,8), direccionInicial = izquierda)
+	var pinchesPared2 = new PinchesEnPared(posicionInicial = game.at(5,5), direccionInicial = abajo)
+	var pinchesPared3 = new PinchesEnPared(posicionInicial = game.at(16,6), direccionInicial = derecha)
+	var pinchesPared4 = new PinchesEnPared(posicionInicial = game.at(16,7), direccionInicial = derecha)
+	var pinchesPared5 = new PinchesEnPared(posicionInicial = game.at(13,1), direccionInicial = derecha)
 	
 	method agregarAyudas(){
 		game.addVisualIn(gema1, game.at(18,11))
@@ -142,7 +147,12 @@ object mapa1  {
 		game.hideAttributes(vida3)
 	}
 	
-	method agregarEnemigos(){		
+	method agregarEnemigos(){	
+		pinchesPared1.agregarEnTablero()	
+		pinchesPared2.agregarEnTablero()
+		pinchesPared3.agregarEnTablero()
+		pinchesPared4.agregarEnTablero()
+		pinchesPared5.agregarEnTablero()
 		lobo1.agregarEnTablero() 
 		lobo2.agregarEnTablero()
 		murcielago1.agregarEnTablero()
@@ -160,6 +170,11 @@ object mapa1  {
 		game.hideAttributes(murcielago1)
 		game.hideAttributes(arquero1)
 		game.hideAttributes(pinches)
+		game.hideAttributes(pinchesPared1)
+		game.hideAttributes(pinchesPared2)
+		game.hideAttributes(pinchesPared3)
+		game.hideAttributes(pinchesPared4)
+		game.hideAttributes(pinchesPared5)
 	}
 	
 	method agregarParedes(){
