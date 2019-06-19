@@ -147,24 +147,16 @@ class Flecha inherits Enemigo{
 }
 
 class Boomerang inherits Enemigo {
-	var imagen = "boomerang-left.png"
+	var imagenes = ["boomerang-left.png", "boomerang-up.png", "boomerang-right.png", "boomerang-down.png"]
 	
-	method image() = imagen
+	method image() = imagenes.get(pasos)
 	
 	method moverse() { 
 		if (pasos < 3){
-			self.rotar()
 			direccion.mover(self)
 			pasos++
 		}
 		else { self.cambiarDireccion() }
-	}
-	
-	method rotar() {
-		if (imagen == "boomerang-left.png") { imagen = "boomerang-up.png" }
-		if (imagen == "boomerang-up.png") { imagen = "boomerang-right.png" }
-		if (imagen == "boomerang-right") { imagen = "boomerang-down.png" }
-		else { imagen = "boomerang-left.png" }
 	}
 	
 	method cambiarDireccion(){
@@ -182,8 +174,8 @@ class Pinche inherits Enemigo {
 	var estanArriba = false
 	
 	method image() {
-		if (estanArriba) return "life.png" 
-		else return "life-out.png" 
+		if (estanArriba) return "pinches-up.png" 
+		else return "pinches-down.png" 
 	}
 	
 	method subirYBajar() { game.onTick(2000, "subir y bajar", { self.movimiento() }) }
