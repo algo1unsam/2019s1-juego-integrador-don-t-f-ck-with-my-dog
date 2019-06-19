@@ -99,8 +99,10 @@ class Arquero inherits Enemigo{
 	var arma
 	
 	method image() {
-		if (direccionInicial == izquierda) { return "franky-left.png" }
-		else return "franky-right.png"
+		if (direccionInicial == izquierda) return "arquero-left.png" 
+		if (direccionInicial == derecha) return "arquero-right.png"
+		if (direccionInicial == arriba) return "arquero-back.png"
+		else return "arquero-front.png"
  	}
 	
 	method dispararFlecha(segs) {
@@ -137,14 +139,7 @@ class Flecha inherits Enemigo{
 		direccion.mover(self)
 		if (position.allElements().contains(pared)){ self.move(posicionInicial) }
 	}
-	/* 
-	method agregarEnTablero(_posicion,_direccion){
-		position=_posicion
-		direccion=_direccion
-		pasos=0
-		game.addVisual(self)
-	} 
-	*/
+
 	method move(nuevaPosicion) { self.position(nuevaPosicion) }
 	
 	override method esAtacado(){}
@@ -152,28 +147,29 @@ class Flecha inherits Enemigo{
 }
 
 class Boomerang inherits Enemigo {
-	method image() {
-		if (direccion == izquierda) return "flecha-left.png" 
-		if (direccion == derecha) return "flecha-right.png"
-		if (direccion == arriba) return "flecha-up.png"
-		else return "flecha-down.png"
-	}
+	var imagen = "boomerang-left.png"
+	
+	method image() = imagen
 	
 	method moverse() { 
 		if (pasos < 3){
+			self.rotar()
 			direccion.mover(self)
 			pasos++
 		}
 		else { self.cambiarDireccion() }
 	}
 	
+	method rotar() {
+		if (imagen == "boomerang-left.png") { imagen = "boomerang-up.png" }
+		if (imagen == "boomerang-up.png") { imagen = "boomerang-right.png" }
+		if (imagen == "boomerang-right") { imagen = "boomerang-down.png" }
+		else { imagen = "boomerang-left.png" }
+	}
+	
 	method cambiarDireccion(){
-		if (direccion == abajo){
-			direccion = arriba
-		}
-		else {
-			direccion = abajo
-		}
+		if (direccion == abajo){ direccion = arriba }
+		else { direccion = abajo }
 		pasos = 0
 	}
 	
