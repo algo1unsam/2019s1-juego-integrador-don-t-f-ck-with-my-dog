@@ -171,20 +171,24 @@ object mapa1  {
 object mapa2{
 	//var contadorDeAgua 	
 	var property posicionFranky = game.at(0,6)
-	var property posicionFinalFranky = game.at(16,0)
-	var arquero1 = new Arquero(posicionInicial = game.at(18,1), direccionInicial = izquierda, flecha = null)
-	var arquero2 = new Arquero(posicionInicial = game.at(18,2), direccionInicial = izquierda, flecha = null)
-	var arquero3 = new Arquero(posicionInicial = game.at(4,11), direccionInicial = abajo, flecha = null)
-	var arquero4 = new Arquero(posicionInicial = game.at(10,8), direccionInicial = arriba, flecha = null)
-	var arquero5 = new Arquero(posicionInicial = game.at(10,7), direccionInicial = abajo, flecha = null)
-	var arquero6 = new Arquero(posicionInicial = game.at(8,7), direccionInicial = arriba, flecha = null)
-	var arquero7 = new Arquero(posicionInicial = game.at(15,11), direccionInicial = abajo, flecha = null)
+	var property posicionFinalFranky = game.at(16,0) 
+	var arquero1 = new Arquero(posicionInicial = game.at(18,1), direccionInicial = izquierda, flecha=null)
+	var arquero2 = new Arquero(posicionInicial = game.at(18,2), direccionInicial = izquierda, flecha=null)
+	var arquero3 = new Arquero(posicionInicial = game.at(4,11), direccionInicial = abajo, flecha=null)
+	var arquero4 = new Arquero(posicionInicial = game.at(10,8), direccionInicial = arriba, flecha=null)
+	var arquero5 = new Arquero(posicionInicial = game.at(10,7), direccionInicial = abajo, flecha=null)
+	var arquero6 = new Arquero(posicionInicial = game.at(8,7), direccionInicial = arriba, flecha=null)
+	var arquero7 = new Arquero(posicionInicial = game.at(15,11), direccionInicial = abajo, flecha=null)
 	var pinche1 = new Pinche(posicionInicial = game.at(6,6), direccionInicial = null)
-	var pinche2 = new Pinche(posicionInicial = game.at(7,2), direccionInicial = null)
+	var pinche2 = new Pinche(posicionInicial = game.at(7,1), direccionInicial = null)
 	var pinche3 = new Pinche(posicionInicial = game.at(12,1), direccionInicial = null)
+	var pinche4 = new Pinche(posicionInicial = game.at(8,1), direccionInicial = null)
 	var murcielago1 = new Murcielago(posicionInicial = game.at(12,7), direccionInicial = arriba)
 	var lobo1 = new Lobo(posicionInicial = game.at(13,5), direccionInicial = izquierda)
 	var lobo2 = new Lobo(posicionInicial = game.at(18,5), direccionInicial = izquierda)
+	var gema1 = new Gema()
+	var gema2 = new Gema()
+	var gema3 = new Gema()
 	
 	method agregarFranky(){
 		game.addVisual(franky)
@@ -227,11 +231,11 @@ object mapa2{
 		constructorTablero.constructorHorizontal(13,4,8,agua)
 		constructorTablero.constructorHorizontal(13,4,7,agua)
 		constructorTablero.constructorHorizontal(7,10,6,agua)
-		constructorTablero.constructorHorizontal(9,10,4,agua)
-		constructorTablero.constructorHorizontal(9,10,3,agua)
+		constructorTablero.constructorHorizontal(9,9,4,agua)
+		constructorTablero.constructorHorizontal(9,9,3,agua)
 		
 		constructorTablero.constructorHorizontal(3,1,2,agua)
-		constructorTablero.constructorHorizontal(7,1,1,agua)
+	//	constructorTablero.constructorHorizontal(7,1,1,agua)
 		constructorTablero.constructorHorizontal(11,1,2,agua)
 	}
 	
@@ -246,12 +250,13 @@ object mapa2{
 		pinche1.agregarEnTablero()
 		pinche2.agregarEnTablero()
 		pinche3.agregarEnTablero()
+		pinche4.agregarEnTablero()
 		murcielago1.agregarEnTablero()
 		lobo1.agregarEnTablero()
 		lobo2.agregarEnTablero()
 		
-		arquero1.disparar(300)
-		arquero2.disparar(400)
+		arquero1.disparar(200)
+		arquero2.disparar(300)
 		arquero3.disparar(300)
 		arquero4.disparar(500)
 		arquero5.disparar(400)
@@ -260,6 +265,7 @@ object mapa2{
 		pinche1.subirYBajar()
 		pinche2.subirYBajar()
 		pinche3.subirYBajar()
+		pinche4.subirYBajar()
 		
 		game.hideAttributes(arquero1)
 		game.hideAttributes(arquero2)
@@ -271,13 +277,22 @@ object mapa2{
 		game.hideAttributes(pinche1)
 		game.hideAttributes(pinche2)
 		game.hideAttributes(pinche3)
+		game.hideAttributes(pinche4)
 		game.hideAttributes(murcielago1)
 		murcielago1.moverse()
 		lobo1.moverse()
 		lobo2.moverse()
 	}
 	
-	method agregarAyudas(){}
+	method agregarAyudas(){
+		game.addVisualIn(gema1, game.at(12,7))
+		game.addVisualIn(gema2, game.at(10,2))
+		game.addVisualIn(gema3, game.at(17,2))
+		
+		game.hideAttributes(gema1)
+		game.hideAttributes(gema2)
+		game.hideAttributes(gema3)
+	}
 	
 	method agregarParedes(){
 		//PARED IZQUIERDA
@@ -305,15 +320,32 @@ object constructorTablero {
 	var property cantidadParedes=0
 	var property nroMapaActual=1
 	
+	method movimientosYAcciones() {
+		//MOVIMIENTOS DEL PERSONAJE
+		keyboard.up().onPressDo { franky.movimiento(arriba, "franky-back.png") }
+		keyboard.down().onPressDo { franky.movimiento(abajo, "franky-front.png") }
+		keyboard.left().onPressDo { franky.movimiento(izquierda, "franky-left.png")}
+		keyboard.right().onPressDo { franky.movimiento(derecha, "franky-right.png") }
+		
+		//ACCIONES DEL PERSONAJE
+		keyboard.space().onPressDo { franky.atacar() }
+		keyboard.a().onPressDo { franky.activar() }
+		
+		//COLISIONES
+		game.whenCollideDo(franky, {enemigo => enemigo.chocarCon(franky)})
+//		game.whenCollideDo(franky, {agua => agua.chocarCon(franky)})
+	}
+	
 	method posicionInicialFranky() = mapas.get(nroMapaActual).posicionFranky()
 	
 	method cargarMapa(){
 		mapas.get(nroMapaActual).agregarParedes()
 		mapas.get(nroMapaActual).agregarLaberinto()
+		mapas.get(nroMapaActual).agregarAyudas()
 		mapas.get(nroMapaActual).agregarVidas()
 		mapas.get(nroMapaActual).agregarEnemigos()
-		mapas.get(nroMapaActual).agregarAyudas()
 		mapas.get(nroMapaActual).agregarFranky()
+		self.movimientosYAcciones()
 	}
 	
 	method constructorVertical(x,cantidadDeBloques,y,algo){
@@ -343,6 +375,7 @@ object constructorTablero {
 		self.borrarMapa()
 		nroMapaActual++
 		self.cargarMapa()
+		franky.limpiarGemas()
 	}
 	
 	method borrarMapa(){

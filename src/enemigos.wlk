@@ -95,7 +95,8 @@ class Murcielago inherits Enemigo{
 }
 
 class Arquero inherits Enemigo{ 
-	var flecha
+	//var flecha
+	var property flecha
 	
 	method image() {
 		if (direccionInicial == izquierda) { return "franky-left.png" }
@@ -106,7 +107,7 @@ class Arquero inherits Enemigo{
 		flecha = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = self.direccionInicial())
 		flecha.agregarEnTablero()
 		game.hideAttributes(flecha)
-		game.onTick(segs,"disparo de flecha",{ flecha.moverse() })
+		game.onTick(segs,"disparo de arma",{ flecha.moverse() })
 	}
 	
 	override method esAtacado(){
@@ -119,19 +120,67 @@ class Arquero inherits Enemigo{
 class Flecha inherits Enemigo{
 	
 	method image() {
-		if (direccionInicial == izquierda) { return "flecha-left.png" }
-		else return "flecha-right.png"
+		if (direccionInicial == izquierda) return "flecha-left.png" 
+		if (direccionInicial == derecha) return "flecha-right.png"
+		if (direccionInicial == arriba) return "flecha-up.png"
+		else return "flecha-down.png"
 	}
 	
 	method moverse() {
 		direccion.mover(self)
 		if (position.allElements().contains(pared)){ self.move(posicionInicial) }
 	}
+	/* 
+	method agregarEnTablero(_posicion,_direccion){
+		position=_posicion
+		direccion=_direccion
+		pasos=0
+		game.addVisual(self)
+	} 
+	*/
+	method move(nuevaPosicion) { self.position(nuevaPosicion) }
+	
+	override method esAtacado(){}
+	
+}
+/* 
+class Boomerang inherits Enemigo {
+	method image() {
+		if (direccion == izquierda) return "flecha-left.png" 
+		if (direccion == derecha) return "flecha-right.png"
+		if (direccion == arriba) return "flecha-up.png"
+		else return "flecha-down.png"
+	}
+	method agregarEnTablero(_posicion,_direccion){
+		position=_posicion
+		direccion=_direccion
+		pasos=0
+		game.addVisual(self)
+	} 
+	
+	method moverse(_posicionInicial) { 
+		if (pasos < 4){
+			direccion.mover(self)
+			pasos++
+		}
+		else { self.cambiarDireccion() }
+	}
+	
+	method cambiarDireccion(){
+		if (direccion == abajo){
+			direccion = arriba
+		}
+		else {
+			direccion = abajo
+		}
+		pasos = 0
+	}
 	
 	method move(nuevaPosicion) { self.position(nuevaPosicion) }
 	
+	override method esAtacado(){}
 }
-
+*/
 class Pinche inherits Enemigo {
 	var estanArriba = false
 	
@@ -146,6 +195,8 @@ class Pinche inherits Enemigo {
 		if (estanArriba) { estanArriba = false }
 		else { estanArriba = true } 
 	}
+	
+	override method esAtacado(){}
 	
 	override method chocarCon(algo){ if (estanArriba) {super(algo)} }
 }

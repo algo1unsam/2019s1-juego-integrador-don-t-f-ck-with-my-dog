@@ -43,6 +43,8 @@ object franky {
 		}	
 	}
 	
+	method limpiarGemas() { gemasAcumuladas.clear() }
+	
 	method acumularGema(unaGema){
 		gemasAcumuladas.add(unaGema)
 		game.removeVisual(unaGema)
