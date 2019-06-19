@@ -11,15 +11,106 @@ object pared {
 	}
 }
 
+//va a ser el objeto que va a ir generando los diferentes mapas
+object constructorTablero {
+	var property enemigosDerrotados = []	
+	var property palancas = []
+	const property mapas = [mapa1, mapa2]
+	var property cantidadParedes = 0
+	var property nroMapaActual = 0
+	
+	method movimientosYAcciones() {
+		//MOVIMIENTOS DEL PERSONAJE
+		keyboard.up().onPressDo { franky.movimiento(arriba, "franky-back.png") }
+		keyboard.down().onPressDo { franky.movimiento(abajo, "franky-front.png") }
+		keyboard.left().onPressDo { franky.movimiento(izquierda, "franky-left.png")}
+		keyboard.right().onPressDo { franky.movimiento(derecha, "franky-right.png") }
+		
+		//ACCIONES DEL PERSONAJE
+		keyboard.space().onPressDo { franky.atacar() }
+		keyboard.a().onPressDo { franky.activar() }
+		
+		//COLISIONES
+		game.whenCollideDo(franky, {enemigo => enemigo.chocarCon(franky)})
+//		game.whenCollideDo(franky, {agua => agua.chocarCon(franky)})
+	}
+	
+	method posicionInicialFranky() = mapas.get(nroMapaActual).posicionFranky()
+	
+	method cargarMapa(){
+		mapas.get(nroMapaActual).agregarParedes()
+		mapas.get(nroMapaActual).agregarLaberinto()
+		mapas.get(nroMapaActual).agregarAyudas()
+		mapas.get(nroMapaActual).agregarVidas()
+		mapas.get(nroMapaActual).agregarEnemigos()
+		mapas.get(nroMapaActual).agregarFranky()
+		self.movimientosYAcciones()
+	}
+	
+	method constructorVertical(x,cantidadDeBloques,y,algo){
+		(y .. y+cantidadDeBloques).forEach({n => game.addVisualIn(algo, game.at(x,n))
+		cantidadParedes++		
+		}) 
+	}
+	
+	method constructorHorizontal(x,cantidadDeBloques,y,algo){
+		(x .. cantidadDeBloques+x).forEach({n => game.addVisualIn(algo, game.at(n,y))	
+		cantidadParedes++
+		}) 
+	}
+	
+	method agregarPalancaTablero(palanca){
+		game.addVisual(palanca)
+		palancas.add(palanca)
+	}
+	
+	method nuevoEnemigoDerrotado(enemigo){ enemigosDerrotados.add(enemigo) }
+	
+	
+	//Cuando Franky pasa de nivel
+	method llegoAPosicionFinal(posicion) = posicion == mapas.get(nroMapaActual).posicionFinalFranky()
+	
+	method pasarDeNivel(){
+		self.borrarMapa()
+		nroMapaActual++
+		self.cargarMapa()
+		franky.limpiarGemas()
+		enemigosDerrotados.clear()
+	}
+	
+	method borrarMapa(){
+		mapas.get(nroMapaActual).removerLaberinto(cantidadParedes)
+		cantidadParedes=0
+		self.borrarElementosDeTablero()
+	}
+	
+	method borrarElementosDeTablero(){ game.clear() }
+
+
+	//Cuando Franky muere
+	method reestablecerEnemigos(){ 
+		if (enemigosDerrotados.size() > 0) { enemigosDerrotados.forEach{enemigo => enemigo.agregarEnTablero()} }
+	}
+	
+	method desactivarPalancas(){ 
+		if (palancas.size() > 0) { palancas.forEach{palanca => palanca.desactivar()} }
+	}
+}
+
+
 object mapa1  {
+	//Hago un set de la posición de franky al comenzar y al finalizar el juego
 	var  property posicionFranky = game.at(1,1)
 	var property posicionFinalFranky = game.at(19,1)
+	
+	//Creo las ayudas
 	var puerta = new Puerta(position = game.at(19,1))
 	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
 	var gema1 = new Gema()
 	var gema2 = new Gema()
 	var gema3 = new Gema()
 	
+	//Creo los enemigos
 	var lobo1 = new Lobo(posicionInicial = game.at(9,8), direccionInicial = izquierda)
 	var lobo2 = new Lobo(posicionInicial = game.at(15,4), direccionInicial = izquierda)
 	var murcielago1 = new Murcielago(posicionInicial = game.at(15,11), direccionInicial = abajo)
@@ -84,9 +175,7 @@ object mapa1  {
 		//PARED ABAJO
 		constructorTablero.constructorHorizontal(1,19,0,pared)
 	}
-	method removerLaberinto(cantidadParedes){
-		(0 .. cantidadParedes - 1).forEach({n => game.removeVisual(pared)})
-	}
+	method removerLaberinto(cantidadParedes){ (0 .. cantidadParedes - 1).forEach({n => game.removeVisual(pared)}) }
 	
 	method agregarLaberinto() {
 		
@@ -172,6 +261,7 @@ object mapa2{
 	//var contadorDeAgua 	
 	var property posicionFranky = game.at(0,6)
 	var property posicionFinalFranky = game.at(16,0) 
+	
 	var arquero1 = new Arquero(posicionInicial = game.at(18,1), direccionInicial = izquierda, arma=null)
 	var arquero2 = new Arquero(posicionInicial = game.at(18,2), direccionInicial = izquierda, arma=null)
 	var arquero3 = new Arquero(posicionInicial = game.at(4,11), direccionInicial = abajo, arma=null)
@@ -186,13 +276,13 @@ object mapa2{
 	var murcielago1 = new Murcielago(posicionInicial = game.at(12,7), direccionInicial = arriba)
 	var lobo1 = new Lobo(posicionInicial = game.at(13,5), direccionInicial = izquierda)
 	var lobo2 = new Lobo(posicionInicial = game.at(18,5), direccionInicial = izquierda)
+	
 	var gema1 = new Gema()
 	var gema2 = new Gema()
 	var gema3 = new Gema()
 	
 	method agregarFranky(){
 		game.addVisual(franky)
-		//game.addVisualCharacter(franky)
 		franky.position(posicionFranky)
 	}
 	
@@ -204,6 +294,22 @@ object mapa2{
 		game.hideAttributes(vida1)
 		game.hideAttributes(vida2)
 		game.hideAttributes(vida3)
+	}
+	
+	method agregarParedes(){
+		//PARED IZQUIERDA
+		constructorTablero.constructorVertical(0,4,1,pared)
+		constructorTablero.constructorVertical(0,4,7,pared)
+		
+		//PARED ARRIBA
+		constructorTablero.constructorHorizontal(0,19,12,pared)
+		
+		//PARED DERECHA
+		constructorTablero.constructorVertical(19,12,1,pared)
+		
+		//PARED ABAJO
+		constructorTablero.constructorHorizontal(0,15,0,pared)
+		constructorTablero.constructorHorizontal(17,2,0,pared)
 	}
 	
 	method agregarLaberinto(){
@@ -235,7 +341,6 @@ object mapa2{
 		constructorTablero.constructorHorizontal(9,9,3,agua)
 		
 		constructorTablero.constructorHorizontal(3,1,2,agua)
-	//	constructorTablero.constructorHorizontal(7,1,1,agua)
 		constructorTablero.constructorHorizontal(11,1,2,agua)
 	}
 	
@@ -266,6 +371,9 @@ object mapa2{
 		pinche2.subirYBajar()
 		pinche3.subirYBajar()
 		pinche4.subirYBajar()
+		murcielago1.moverse()
+		lobo1.moverse()
+		lobo2.moverse()
 		
 		game.hideAttributes(arquero1)
 		game.hideAttributes(arquero2)
@@ -278,10 +386,7 @@ object mapa2{
 		game.hideAttributes(pinche2)
 		game.hideAttributes(pinche3)
 		game.hideAttributes(pinche4)
-		game.hideAttributes(murcielago1)
-		murcielago1.moverse()
-		lobo1.moverse()
-		lobo2.moverse()
+		game.hideAttributes(murcielago1)	
 	}
 	
 	method agregarAyudas(){
@@ -293,106 +398,5 @@ object mapa2{
 		game.hideAttributes(gema2)
 		game.hideAttributes(gema3)
 	}
-	
-	method agregarParedes(){
-		//PARED IZQUIERDA
-		constructorTablero.constructorVertical(0,4,1,pared)
-		constructorTablero.constructorVertical(0,4,7,pared)
-		
-		//PARED ARRIBA
-		constructorTablero.constructorHorizontal(0,19,12,pared)
-		
-		//PARED DERECHA
-		constructorTablero.constructorVertical(19,12,1,pared)
-		
-		//PARED ABAJO
-		constructorTablero.constructorHorizontal(0,15,0,pared)
-		constructorTablero.constructorHorizontal(17,2,0,pared)
-	}
 }
 
-//va a ser el objeto que va a ir generando los diferentes mapas
-// por ahora lo uso para reestablecer los elementos del tablero al morir
-object constructorTablero {
-	var property enemigosDerrotados=[]	
-	var property palancas=[]
-	const property mapas = [mapa1, mapa2]
-	var property cantidadParedes=0
-	var property nroMapaActual=1
-	
-	method movimientosYAcciones() {
-		//MOVIMIENTOS DEL PERSONAJE
-		keyboard.up().onPressDo { franky.movimiento(arriba, "franky-back.png") }
-		keyboard.down().onPressDo { franky.movimiento(abajo, "franky-front.png") }
-		keyboard.left().onPressDo { franky.movimiento(izquierda, "franky-left.png")}
-		keyboard.right().onPressDo { franky.movimiento(derecha, "franky-right.png") }
-		
-		//ACCIONES DEL PERSONAJE
-		keyboard.space().onPressDo { franky.atacar() }
-		keyboard.a().onPressDo { franky.activar() }
-		
-		//COLISIONES
-		game.whenCollideDo(franky, {enemigo => enemigo.chocarCon(franky)})
-//		game.whenCollideDo(franky, {agua => agua.chocarCon(franky)})
-	}
-	
-	method posicionInicialFranky() = mapas.get(nroMapaActual).posicionFranky()
-	
-	method cargarMapa(){
-		mapas.get(nroMapaActual).agregarParedes()
-		mapas.get(nroMapaActual).agregarLaberinto()
-		mapas.get(nroMapaActual).agregarAyudas()
-		mapas.get(nroMapaActual).agregarVidas()
-		mapas.get(nroMapaActual).agregarEnemigos()
-		mapas.get(nroMapaActual).agregarFranky()
-		self.movimientosYAcciones()
-	}
-	
-	method constructorVertical(x,cantidadDeBloques,y,algo){
-		(y .. y+cantidadDeBloques).forEach({n => game.addVisualIn(algo, game.at(x,n))
-		cantidadParedes++		
-		}) 
-	}
-	
-	method constructorHorizontal(x,cantidadDeBloques,y,algo){
-		(x .. cantidadDeBloques+x).forEach({n => game.addVisualIn(algo, game.at(n,y))	
-		cantidadParedes++
-		}) 
-	}
-	
-	method agregarPalancaTablero(palanca){
-		game.addVisual(palanca)
-		palancas.add(palanca)
-	}
-	
-	method nuevoEnemigoDerrotado(enemigo){ enemigosDerrotados.add(enemigo) }
-	
-	
-	//Cuando Franky pasa de nivel
-	method llegoAPosicionFinal(posicion) = posicion == mapas.get(nroMapaActual).posicionFinalFranky()
-	
-	method pasarDeNivel(){
-		self.borrarMapa()
-		nroMapaActual++
-		self.cargarMapa()
-		franky.limpiarGemas()
-	}
-	
-	method borrarMapa(){
-		mapas.get(nroMapaActual).removerLaberinto(cantidadParedes)
-		cantidadParedes=0
-		self.borrarElementosDeTablero()
-	}
-	
-	method borrarElementosDeTablero(){ game.clear() }
-
-
-	//Cuando Franky muere
-	method reestablecerEnemigos(){ 
-		if (enemigosDerrotados.size() > 0) { enemigosDerrotados.forEach{enemigo => enemigo.agregarEnTablero()} }
-	}
-	
-	method desactivarPalancas(){ 
-		if (palancas.size() > 0) { palancas.forEach{palanca => palanca.desactivar()} }
-	}
-}
