@@ -96,23 +96,30 @@ class Murcielago inherits Enemigo{
 
 class Arquero inherits Enemigo{ 
 	//var flecha
-	var property flecha
+	var arma
 	
 	method image() {
 		if (direccionInicial == izquierda) { return "franky-left.png" }
 		else return "franky-right.png"
  	}
 	
-	method disparar(segs) {
-		flecha = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = self.direccionInicial())
-		flecha.agregarEnTablero()
-		game.hideAttributes(flecha)
-		game.onTick(segs,"disparo de arma",{ flecha.moverse() })
+	method dispararFlecha(segs) {
+		arma = new Flecha(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = self.direccionInicial())
+		arma.agregarEnTablero()
+		game.hideAttributes(arma)
+		game.onTick(segs,"disparo de arma",{ arma.moverse() })
+	}
+	
+	method dispararBoomerang(segs) {
+		arma = new Boomerang(posicionInicial = direccion.devolverProximaPosicion(self.position()), direccionInicial = self.direccionInicial())
+		arma.agregarEnTablero()
+		game.hideAttributes(arma)
+		game.onTick(segs,"disparo de arma",{ arma.moverse() })
 	}
 	
 	override method esAtacado(){
 		super()
-		game.removeVisual(flecha)	
+		game.removeVisual(arma)	
 	} 
 }	
 
@@ -143,7 +150,7 @@ class Flecha inherits Enemigo{
 	override method esAtacado(){}
 	
 }
-/* 
+
 class Boomerang inherits Enemigo {
 	method image() {
 		if (direccion == izquierda) return "flecha-left.png" 
@@ -151,15 +158,9 @@ class Boomerang inherits Enemigo {
 		if (direccion == arriba) return "flecha-up.png"
 		else return "flecha-down.png"
 	}
-	method agregarEnTablero(_posicion,_direccion){
-		position=_posicion
-		direccion=_direccion
-		pasos=0
-		game.addVisual(self)
-	} 
 	
-	method moverse(_posicionInicial) { 
-		if (pasos < 4){
+	method moverse() { 
+		if (pasos < 3){
 			direccion.mover(self)
 			pasos++
 		}
@@ -180,7 +181,7 @@ class Boomerang inherits Enemigo {
 	
 	override method esAtacado(){}
 }
-*/
+
 class Pinche inherits Enemigo {
 	var estanArriba = false
 	
