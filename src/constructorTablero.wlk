@@ -21,9 +21,9 @@ object gameOver {
 object constructorTablero {
 	var property enemigosDerrotados = []	
 	var property palancas = []
-	const property mapas = [mapa1, mapa2]
+	const property mapas = [mapa1, mapa2, mapa3]
 	var property cantidadParedes = 0
-	var property nroMapaActual = 1
+	var property nroMapaActual = 2
 	
 	method movimientosYAcciones() {
 		//MOVIMIENTOS DEL PERSONAJE
@@ -196,6 +196,7 @@ object mapa1  {
 		//PARED ABAJO
 		constructorTablero.constructorHorizontal(1,19,0,pared)
 	}
+	
 	method removerLaberinto(cantidadParedes){ (0 .. cantidadParedes - 1).forEach({n => game.removeVisual(pared)}) }
 	
 	method agregarLaberinto() {
@@ -423,3 +424,44 @@ object mapa2{
 	}
 }
 
+object mapa3 {
+	var property posicionFranky = game.at(17,12)
+	var property posicionFinalFranky = game.at(16,0)
+	
+	var sierra1 = new Sierra(posicionInicial = game.at(12,8), direccionInicial = izquierda)
+	
+	method agregarParedes(){
+		//PARED IZQUIERDA
+		constructorTablero.constructorVertical(0,12,0,pared)
+		
+		//PARED ARRIBA
+		constructorTablero.constructorHorizontal(1,15,12,pared)
+		constructorTablero.constructorHorizontal(18,0,12,pared)
+		
+		//PARED DERECHA
+		constructorTablero.constructorVertical(19,12,1,pared)
+		
+		//PARED ABAJO
+		constructorTablero.constructorHorizontal(1,19,0,pared)
+	}
+	
+	method agregarLaberinto() {}
+	
+	method agregarEnemigos() {
+		sierra1.agregarEnTablero()
+		
+		sierra1.moverse()
+		
+		game.hideAttributes(sierra1)
+	}
+	
+	method agregarAyudas() {}
+	
+	method agregarFranky() {
+		game.addVisual(franky)
+		franky.position(posicionFranky)
+		game.addVisual(huesitos)
+	}
+	
+	method agregarVidas() {}
+}

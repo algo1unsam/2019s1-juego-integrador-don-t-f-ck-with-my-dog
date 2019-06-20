@@ -213,3 +213,32 @@ object agua {
 	method esAtacado(){}
 	method esUsado(){}
 }
+
+class Sierra inherits Enemigo {
+	var imagenes = ["sierra-1.png", "sierra-2.png", "sierra-3.png", "sierra-4.png"]
+	var i = 0
+	
+	method image() = imagenes.get(i)
+	
+	method moverse() { game.onTick(200, "girar sierra", {self.girar()}) }
+	
+	method girar() { 
+		if (pasos < 3) {
+			direccion.mover(self)
+			pasos++
+			i++
+		}
+		else { self.cambiarDireccion() }
+	}
+	
+	method cambiarDireccion(){
+		if (direccion == izquierda){ direccion = derecha }
+		else { direccion = izquierda }
+		pasos = 0
+		i = 0
+	}
+	
+	method move(nuevaPosicion) { self.position(nuevaPosicion) }
+	
+	override method esAtacado(){}
+}

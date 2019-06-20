@@ -100,6 +100,22 @@ object franky {
 	}
 }
 
+object huesitos {
+	var property position = game.at(9,6)
+	var property direccion = izquierda
+	
+	method image() {
+		if (direccion == arriba) return "huesitos-back.png"
+		if (direccion == abajo) return "huesitos-front.png"
+		if (direccion == izquierda) return "huesitos-left.png"
+		else return "huesitos-right.png"
+	}
+	
+	method chocarCon(jugador){
+		jugador.direccion().retroceder(jugador)
+	}
+}
+
 object tumba {
 	method esUsado(){}
 	method esAtacado(){}
