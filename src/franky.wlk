@@ -33,17 +33,17 @@ object franky {
 		self.acumularGema(unaGema)
 		self.gemaAcumuladaAlTablero(unaGema)
 		
-		if (gemasAcumuladas.size() == 3) {
+		if (gemasAcumuladas.size() == 3 && vida<3) {
 			vida ++	
 			cant = 3	
 			corazonesAcumulados.get(vida-1).llena()
-			if (vida > 3){ 
-				vida = 3
-			}
 		}	
 	}
 	
-	method limpiarGemas() { gemasAcumuladas.clear() }
+	method limpiarGemas() { 
+		gemasAcumuladas.clear()
+		cant = 0
+	}
 	
 	method acumularGema(unaGema){
 		gemasAcumuladas.add(unaGema)
@@ -55,15 +55,30 @@ object franky {
 		game.addVisualIn(unaGema, game.at(cant,12))
 	}
 	
+	method tumba() { imagen = "tumba.png" }
+	
+	method convertirseEnTumba() { game.addVisualIn(tumba, self.position()) }
+	
 	method morir(){
+		self.convertirseEnTumba()
+		tumba.salirse()
 		position = constructorTablero.posicionInicialFranky()
 		//Al morir tiene que dejar el tablero como iniciado el juego por eso llamo a estos dos métodos
 		constructorTablero.reestablecerEnemigos()
 		constructorTablero.desactivarPalancas()
+		self.perderVida()
+	}
+	
+	method perderVida() {
 		vida --
 		if (vida == 2) { vida3.vacia() }
 		if (vida == 1) { vida2.vacia() } 
-		if (vida == 0) { game.stop() }
+		if (vida == 0) { 
+			game.addVisualIn(gameOver, game.origin())
+			gameOver.cerrarJuego()
+			//game.stop()
+			//pantalla = 650 x 1000
+		}
 	}
 	
 	method activar(){
@@ -82,5 +97,21 @@ object franky {
 		if (not posicionEnemiga.allElements().contains(pared)) {
 			posicionEnemiga.allElements().forEach({enemigo => enemigo.esAtacado()})
 		}
+	}
+}
+
+object tumba {
+	method esUsado(){}
+	method esAtacado(){}
+	
+	method image() = "tumba.png"
+	
+	method chocarCon(algo){}
+	
+	method salirse() {
+		game.onTick(1000,"tumba",{ 
+			game.removeVisual(self)
+			game.removeTickEvent("tumba")
+		})
 	}
 }

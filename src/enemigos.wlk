@@ -10,7 +10,13 @@ class Enemigo {
 	const posicionInicial
 	const property direccionInicial
 
-	method chocarCon(algo){ if (algo == franky){algo.morir()} }
+	method chocarCon(algo){ 
+		if (algo == franky){
+	//		game.onTick(1000,"tumba",{algo.tumba()})
+	//		game.removeTickEvent("tumba")
+			algo.morir()
+		} 
+	}
 	
 	method agregarEnTablero(){
 		position=posicionInicial

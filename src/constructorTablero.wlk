@@ -11,13 +11,19 @@ object pared {
 	}
 }
 
+object gameOver {
+	method image() = "game-over.png"
+	
+	method cerrarJuego() {game.onTick(2000,"Game over", {game.stop()})}
+}
+
 //va a ser el objeto que va a ir generando los diferentes mapas
 object constructorTablero {
 	var property enemigosDerrotados = []	
 	var property palancas = []
 	const property mapas = [mapa1, mapa2]
 	var property cantidadParedes = 0
-	var property nroMapaActual = 0
+	var property nroMapaActual = 1
 	
 	method movimientosYAcciones() {
 		//MOVIMIENTOS DEL PERSONAJE
@@ -288,6 +294,7 @@ object mapa2{
 	var pinche2 = new Pinche(posicionInicial = game.at(7,1), direccionInicial = null)
 	var pinche3 = new Pinche(posicionInicial = game.at(12,1), direccionInicial = null)
 	var pinche4 = new Pinche(posicionInicial = game.at(8,1), direccionInicial = null)
+	var pinche5 = new Pinche(posicionInicial = game.at(12,2), direccionInicial = null)
 	var murcielago1 = new Murcielago(posicionInicial = game.at(12,7), direccionInicial = arriba)
 	var lobo1 = new Lobo(posicionInicial = game.at(13,5), direccionInicial = izquierda)
 	var lobo2 = new Lobo(posicionInicial = game.at(18,5), direccionInicial = izquierda)
@@ -353,10 +360,9 @@ object mapa2{
 		constructorTablero.constructorHorizontal(13,4,7,agua)
 		constructorTablero.constructorHorizontal(7,10,6,agua)
 		constructorTablero.constructorHorizontal(9,9,4,agua)
-		constructorTablero.constructorHorizontal(9,9,3,agua)
+		constructorTablero.constructorHorizontal(12,6,3,agua)
 		
 		constructorTablero.constructorHorizontal(3,1,2,agua)
-		constructorTablero.constructorHorizontal(11,1,2,agua)
 	}
 	
 	method agregarEnemigos() {
@@ -371,6 +377,7 @@ object mapa2{
 		pinche2.agregarEnTablero()
 		pinche3.agregarEnTablero()
 		pinche4.agregarEnTablero()
+		pinche5.agregarEnTablero()
 		murcielago1.agregarEnTablero()
 		lobo1.agregarEnTablero()
 		lobo2.agregarEnTablero()
@@ -386,6 +393,7 @@ object mapa2{
 		pinche2.subirYBajar()
 		pinche3.subirYBajar()
 		pinche4.subirYBajar()
+		pinche5.subirYBajar()
 		murcielago1.moverse()
 		lobo1.moverse()
 		lobo2.moverse()
@@ -406,7 +414,7 @@ object mapa2{
 	
 	method agregarAyudas(){
 		game.addVisualIn(gema1, game.at(12,7))
-		game.addVisualIn(gema2, game.at(10,2))
+		game.addVisualIn(gema2, game.at(10,3))
 		game.addVisualIn(gema3, game.at(17,2))
 		
 		game.hideAttributes(gema1)

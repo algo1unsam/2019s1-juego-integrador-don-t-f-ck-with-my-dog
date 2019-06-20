@@ -32,16 +32,17 @@ class Puerta {
 	var property position
 	var estaAbierto = false
 	
-	method image() = "wall.png"
-	 
+	method image()  {
+		if (estaAbierto) return "ground.png"
+		else return "wall.png"
+	} 
+	
 	method abrir(){
 		estaAbierto=true
-		game.removeVisual(self)
 	}
 	
 	method cerrar(){ 
 		estaAbierto = false
-		game.addVisual(self)
 	}
  	
 	method chocarCon(jugador){ if (!estaAbierto){ jugador.direccion().retroceder(jugador) } }
