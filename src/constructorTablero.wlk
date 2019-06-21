@@ -24,6 +24,7 @@ object constructorTablero {
 	const property mapas = [mapa1, mapa2, mapa3]
 	var property cantidadParedes = 0
 	var property nroMapaActual = 2
+	var property zombisEnTablero=[]
 	
 	method movimientosYAcciones() {
 		//MOVIMIENTOS DEL PERSONAJE
@@ -91,8 +92,13 @@ object constructorTablero {
 	}
 	
 	method borrarElementosDeTablero(){ game.clear() }
-
-
+	/* 
+	method frankySeMovio(){
+		zombisEnTablero.forEach({zombi => if (!zombi.detectarFranky() && zombi.estaFrenado()){zombi.moverse()
+			zombi.estaFrenado(false)	
+		}})
+	}
+	*/
 	//Cuando Franky muere
 	method reestablecerEnemigos(){ 
 		if (enemigosDerrotados.size() > 0) { enemigosDerrotados.forEach{enemigo => enemigo.agregarEnTablero()} }
@@ -437,6 +443,9 @@ object mapa3 {
 	var sierra4 = new Sierra(posicionInicial = game.at(14,5), direccionInicial = arriba)
 	var sierra5 = new Sierra(posicionInicial = game.at(11,5), direccionInicial = arriba)
 	var sierra6 = new Sierra(posicionInicial = game.at(7,5), direccionInicial = arriba)
+	var zombi1 = new Zombi(posicionInicial = game.at(2,1), direccionInicial = derecha, posicionFinal=game.at(17,1),image="zombi-right-1.png")
+	var zombi2 = new Zombi(posicionInicial = game.at(2,11), direccionInicial = derecha, posicionFinal=game.at(18,11),image="zombi-right-1.png")
+	
 	var palanca1 = new Palanca(position = game.at(1,1),objetoCerrado=jaula1)
 	var palanca2 = new Palanca(position = game.at(1,11),objetoCerrado=jaula1)
 	var palanca3 = new Palanca(position = game.at(18,1),objetoCerrado=jaula1)
@@ -490,6 +499,8 @@ object mapa3 {
 		sierra4.agregarEnTablero()
 		sierra5.agregarEnTablero()
 		sierra6.agregarEnTablero()
+		zombi1.agregarEnTablero()
+		zombi2.agregarEnTablero()
 		
 		sierra1.moverse()
 		sierra2.moverse()
@@ -497,12 +508,16 @@ object mapa3 {
 		sierra4.moverse()
 		sierra5.moverse()
 		sierra6.moverse()
+		zombi1.moverse()
+		zombi2.moverse()
 		game.hideAttributes(sierra1)
 		game.hideAttributes(sierra2)
 		game.hideAttributes(sierra3)
 		game.hideAttributes(sierra4)
 		game.hideAttributes(sierra5)
 		game.hideAttributes(sierra6)
+		game.hideAttributes(zombi1)
+		game.hideAttributes(zombi2)
 	}
 	
 	method agregarAyudas() {

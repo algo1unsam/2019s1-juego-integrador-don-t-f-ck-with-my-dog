@@ -17,6 +17,7 @@ object franky {
 	method move(nuevaPosicion) { 
 		self.position(nuevaPosicion)
 		if (constructorTablero.llegoAPosicionFinal(nuevaPosicion)) { constructorTablero.pasarDeNivel() }
+		//constructorTablero.frankySeMovio()
 	}
 	
 	method movimiento(direccionTecla, imagenDireccion){

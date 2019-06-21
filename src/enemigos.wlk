@@ -251,9 +251,56 @@ class Sierra inherits Enemigo {
 
 class Zombi inherits Enemigo {
 	const posicionFinal
+	var image
+	//var property estaFrenado=false
+	
+	method cambiarImagen() {
+		if (direccion == izquierda){
+			if (image =="zombie-left-1.png"){image="zombie-left-2.png"}
+			else {image="zombie-left-1.png"}
+		}
+		else {
+			if (image =="zombi-right-1.png"){image="zombie-right-2.png"}
+			else {image="zombi-right-1.png"}
+		}
+	}
+	method image(){return image}
 	
 	override method esAtacado(){}
-	method moverse() { game.onTick(500, "lobo enemigo", {self.avanzar()}) }	
+	
+	method moverse() { game.onTick(500, "Zombi Enemigo", {
+		if (self.detectarFranky()){
+			game.removeTickEvent("Zombi Enemigo")
+			self.acelerarZombi()
+			//estaFrenado=true
+		}
+		else {
+			self.avanzar()	
+		}
+		})
+	 }
+	 method acelerarZombi(){
+	 	game.onTick(200,"Zombi Acelerado",{
+	 		if (!self.detectarFranky()){
+			game.removeTickEvent("Zombi Acelerado")
+			self.moverse()
+			//estaFrenado=true
+		} 
+		else{
+	 		self.avanzar()
+	 	}
+	 	} )
+	 }	
+	//method estaFrenado(_estaFrenado){estaFrenado=_estaFrenado}
+	method detectarFranky(){
+		if (direccion == derecha){
+		return (position.x() < franky.position().x() && position.y() == franky.position().y())
+		}
+		else{
+			return (position.x() > franky.position().x() && position.y() == franky.position().y())	
+		}
+	}
+	
 	method avanzar(){
 		if (direccionInicial == direccion){
 		if (position == posicionFinal){self.cambiarDireccion()}
@@ -263,11 +310,18 @@ class Zombi inherits Enemigo {
 			if (position == posicionInicial){self.cambiarDireccion()}
 			else { direccion.mover(self) }
 		}
+		self.cambiarImagen()
 	}
+	
 	method cambiarDireccion(){
 		if (direccion == izquierda){ direccion = derecha }
 		else { if (direccion == derecha){ direccion = izquierda }}
-		if (direccion == arriba){ direccion = abajo }
-		else { if (direccion == abajo){ direccion = arriba }}
 	}
+	
+	override method agregarEnTablero(){
+		super()
+		constructorTablero.zombisEnTablero().add(self)
+	}
+	
+	method move(nuevaPosicion) { self.position(nuevaPosicion) }
 }
