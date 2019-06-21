@@ -428,7 +428,18 @@ object mapa3 {
 	var property posicionFranky = game.at(17,12)
 	var property posicionFinalFranky = game.at(16,0)
 	
-	var sierra1 = new Sierra(posicionInicial = game.at(12,8), direccionInicial = izquierda)
+	var jaula1 = new Jaula(position = game.at(9,6),tieneEncerrado=huesitos)
+	
+	
+	var sierra1 = new Sierra(posicionInicial = game.at(10,8), direccionInicial = izquierda)
+	var sierra2 = new Sierra(posicionInicial = game.at(10,4), direccionInicial = izquierda)
+	var sierra3 = new Sierra(posicionInicial = game.at(5,5), direccionInicial = arriba)
+	var sierra4 = new Sierra(posicionInicial = game.at(14,5), direccionInicial = arriba)
+	var sierra5 = new Sierra(posicionInicial = game.at(11,5), direccionInicial = arriba)
+	var sierra6 = new Sierra(posicionInicial = game.at(7,5), direccionInicial = arriba)
+	var palanca1 = new Palanca(position = game.at(1,1),objetoCerrado=jaula1)
+	var palanca2 = new Palanca(position = game.at(1,11),objetoCerrado=jaula1)
+	var palanca3 = new Palanca(position = game.at(18,1),objetoCerrado=jaula1)
 	
 	method agregarParedes(){
 		//PARED IZQUIERDA
@@ -445,22 +456,69 @@ object mapa3 {
 		constructorTablero.constructorHorizontal(1,19,0,pared)
 	}
 	
-	method agregarLaberinto() {}
+	method agregarLaberinto() {
+		constructorTablero.constructorHorizontal(3,5,3,pared)
+		constructorTablero.constructorHorizontal(3,4,4,pared)
+		constructorTablero.constructorHorizontal(12,4,4,pared)
+		constructorTablero.constructorHorizontal(10,6,3,pared)
+		
+		constructorTablero.constructorHorizontal(3,0,5,pared)
+		constructorTablero.constructorVertical(3,2,7,pared)
+		constructorTablero.constructorHorizontal(4,0,5,pared)
+		constructorTablero.constructorVertical(4,2,7,pared)
+		constructorTablero.constructorVertical(5,1,8,pared)
+		constructorTablero.constructorHorizontal(6,0,5,pared)
+		constructorTablero.constructorVertical(6,2,7,pared)
+		constructorTablero.constructorVertical(7,1,8,pared)
+		//constructorTablero.constructorHorizontal(8,0,5,pared)
+		//constructorTablero.constructorHorizontal(8,0,7,pared)
+		constructorTablero.constructorHorizontal(8,0,9,pared)
+		constructorTablero.constructorHorizontal(10,6,9,pared)
+		constructorTablero.constructorHorizontal(11,5,8,pared)
+		constructorTablero.constructorHorizontal(12,1,7,pared)
+		constructorTablero.constructorHorizontal(15,1,7,pared)
+		constructorTablero.constructorHorizontal(12,1,5,pared)
+		constructorTablero.constructorHorizontal(15,1,5,pared)
+		constructorTablero.constructorHorizontal(11,0,4,pared)
+		
+	}
 	
 	method agregarEnemigos() {
 		sierra1.agregarEnTablero()
+		sierra2.agregarEnTablero()
+		sierra3.agregarEnTablero()
+		sierra4.agregarEnTablero()
+		sierra5.agregarEnTablero()
+		sierra6.agregarEnTablero()
 		
 		sierra1.moverse()
-		
+		sierra2.moverse()
+		sierra3.moverse()
+		sierra4.moverse()
+		sierra5.moverse()
+		sierra6.moverse()
 		game.hideAttributes(sierra1)
+		game.hideAttributes(sierra2)
+		game.hideAttributes(sierra3)
+		game.hideAttributes(sierra4)
+		game.hideAttributes(sierra5)
+		game.hideAttributes(sierra6)
 	}
 	
-	method agregarAyudas() {}
+	method agregarAyudas() {
+		game.addVisual(jaula1)
+		constructorTablero.agregarPalancaTablero(palanca1)
+		constructorTablero.agregarPalancaTablero(palanca2)
+		constructorTablero.agregarPalancaTablero(palanca3)
+		
+	}
 	
 	method agregarFranky() {
 		game.addVisual(franky)
 		franky.position(posicionFranky)
-		game.addVisual(huesitos)
+		//game.addVisual(huesitos)
+		//game.hideAttributes(huesitos)
+		game.hideAttributes(franky)
 	}
 	
 	method agregarVidas() {}

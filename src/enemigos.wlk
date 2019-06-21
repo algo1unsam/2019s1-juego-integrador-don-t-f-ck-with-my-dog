@@ -222,20 +222,26 @@ class Sierra inherits Enemigo {
 	
 	method moverse() { game.onTick(200, "girar sierra", {self.girar()}) }
 	
-	method girar() { 
-		if (pasos < 3) {
+	method girar() {
+		
+		if	(i<3){i++} 
+		else {i=0}
+		  
+		if (pasos < 2) {
 			direccion.mover(self)
 			pasos++
-			i++
+			//i++
 		}
 		else { self.cambiarDireccion() }
 	}
 	
 	method cambiarDireccion(){
 		if (direccion == izquierda){ direccion = derecha }
-		else { direccion = izquierda }
+		else { if (direccion == derecha){ direccion = izquierda }}
+		if (direccion == arriba){ direccion = abajo }
+		else { if (direccion == abajo){ direccion = arriba }}
 		pasos = 0
-		i = 0
+		//i = 0
 	}
 	
 	method move(nuevaPosicion) { self.position(nuevaPosicion) }

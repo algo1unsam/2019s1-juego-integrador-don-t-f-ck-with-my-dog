@@ -101,7 +101,7 @@ object franky {
 }
 
 object huesitos {
-	var property position = game.at(9,6)
+	var property position=game.at(0,0)
 	var property direccion = izquierda
 	
 	method image() {
