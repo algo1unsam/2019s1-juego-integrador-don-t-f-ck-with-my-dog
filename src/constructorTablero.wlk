@@ -32,7 +32,7 @@ object constructorTablero {
 	var property palancas = []
 	const property mapas = [mapa1, mapa2, mapa3]
 	var property cantidadParedes = 0
-	var property nroMapaActual = 2
+	var property nroMapaActual = 0
 	var property zombisEnTablero=[]
 	
 	method movimientosYAcciones() {
@@ -321,6 +321,7 @@ object mapa2{
 	method agregarFranky(){
 		game.addVisual(franky)
 		franky.position(posicionFranky)
+		game.hideAttributes(franky)
 	}
 	
 	method agregarVidas(){
@@ -452,9 +453,13 @@ object mapa3 {
 	var sierra5 = new Sierra(posicionInicial = game.at(11,5), direccionInicial = arriba)
 	var sierra6 = new Sierra(posicionInicial = game.at(7,5), direccionInicial = arriba)
 	var zombi1 = new Zombi(posicionInicial = game.at(2,1), direccionInicial = derecha, posicionFinal=game.at(17,1),image="zombi-right-1.png")
-//	var zombi2 = new Zombi(posicionInicial = game.at(2,11), direccionInicial = derecha, posicionFinal=game.at(18,11),image="zombi-right-1.png")
-	var fantasma1 = new Fantasma(posicionInicial = game.at(1,11), direccionInicial = derecha, posicionFinal=game.at(18,11))
-	var fantasma2 = new Fantasma(posicionInicial = game.at(18,10), direccionInicial = izquierda, posicionFinal = game.at(1,10))
+	var zombi2 = new Zombi(posicionInicial = game.at(2,11), direccionInicial = derecha, posicionFinal=game.at(18,11),image="zombi-right-1.png")
+	var fantasma1 = new Fantasma(posicionInicial = game.at(1,10), direccionInicial = derecha, posicionFinal=game.at(18,10))
+	var fantasma2 = new Fantasma(posicionInicial = game.at(18,2), direccionInicial = izquierda, posicionFinal = game.at(1,2))
+//	var fantasma3 = new Fantasma(posicionInicial = game.at(17,1), direccionInicial = arriba, posicionFinal = game.at(17,10))
+//	var fantasma4 = new Fantasma(posicionInicial = game.at(1,10), direccionInicial = abajo, posicionFinal = game.at(1,2))
+//	var fantasma5 = new Fantasma(posicionInicial = game.at(2,1), direccionInicial = arriba, posicionFinal = game.at(2,11))
+//	var fantasma6 = new Fantasma(posicionInicial = game.at(18,10), direccionInicial = abajo, posicionFinal = game.at(18,2))
 	var arquero1 = new Arquero(posicionInicial = game.at(1,2), direccionInicial = arriba, arma=null)
 	var arquero2 = new Arquero(posicionInicial = game.at(18,11), direccionInicial = abajo, arma=null)
 	var palanca1 = new Palanca(position = game.at(1,1),objetoCerrado=jaula1)
@@ -511,9 +516,13 @@ object mapa3 {
 		sierra5.agregarEnTablero()
 		sierra6.agregarEnTablero()
 		zombi1.agregarEnTablero()
-	//	zombi2.agregarEnTablero()
+		zombi2.agregarEnTablero()
 		fantasma1.agregarEnTablero()
 		fantasma2.agregarEnTablero()
+	//	fantasma3.agregarEnTablero()
+	//	fantasma4.agregarEnTablero()
+	//	fantasma5.agregarEnTablero()
+	//	fantasma6.agregarEnTablero()
 		arquero1.agregarEnTablero()
 		arquero2.agregarEnTablero()
 		
@@ -523,10 +532,14 @@ object mapa3 {
 		sierra4.moverse()
 		sierra5.moverse()
 		sierra6.moverse()
-		zombi1.moverse()
-	//	zombi2.moverse()
+		self.zombi1Caminando()
+		self.zombi2Caminando()
 		fantasma1.moverse()
 		fantasma2.moverse()
+	//	fantasma3.moverse()
+	//	fantasma4.moverse()
+	//	fantasma5.moverse()
+	//	fantasma6.moverse()
 		arquero1.dispararFlecha(300)
 		arquero2.dispararFlecha(300)
 		
@@ -537,9 +550,13 @@ object mapa3 {
 		game.hideAttributes(sierra5)
 		game.hideAttributes(sierra6)
 		game.hideAttributes(zombi1)
-	//	game.hideAttributes(zombi2)
+		game.hideAttributes(zombi2)
 		game.hideAttributes(fantasma1)
 		game.hideAttributes(fantasma2)
+	//	game.hideAttributes(fantasma3)
+	//	game.hideAttributes(fantasma4)
+	//	game.hideAttributes(fantasma5)
+	//	game.hideAttributes(fantasma6)
 		game.hideAttributes(arquero1)
 		game.hideAttributes(arquero2)
 	}
@@ -573,5 +590,47 @@ object mapa3 {
 		game.hideAttributes(vida1)
 		game.hideAttributes(vida2)
 		game.hideAttributes(vida3)
+	}
+	
+	method zombi2Caminando(){
+		game.onTick(500, "Zombi Caminando 2", {
+			if (zombi2.detectarFranky()){
+				game.removeTickEvent("Zombi Caminando 2")		
+				self.zombi2Corriendo()
+			}
+			else{ zombi2.avanzar() }
+		})
+	}
+	
+	method zombi2Corriendo(){
+			game.onTick(200,"Zombi Acelerado 2",{
+	 		if (!zombi2.detectarFranky()){
+				game.removeTickEvent("Zombi Acelerado 2")
+				self.zombi2Caminando()
+			}
+			else {
+				zombi2.avanzar()
+			}
+			})
+	}
+		
+	method zombi1Caminando(){
+		game.onTick(500, "Zombi Caminando 1", {
+			if (zombi1.detectarFranky()){
+			game.removeTickEvent("Zombi Caminando 1")		
+			self.zombi1Corriendo()
+		}
+		else{ zombi1.avanzar() }
+		})
+	}
+		
+	method zombi1Corriendo(){
+			game.onTick(200,"Zombi Acelerado 1",{
+	 		if (!zombi1.detectarFranky()){
+				game.removeTickEvent("Zombi Acelerado 1")
+				self.zombi1Caminando()
+			}
+			else { zombi1.avanzar() }
+			})
 	}
 }
