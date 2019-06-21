@@ -32,7 +32,7 @@ object constructorTablero {
 	var property palancas = []
 	const property mapas = [mapa1, mapa2, mapa3]
 	var property cantidadParedes = 0
-	var property nroMapaActual = 2
+	var property nroMapaActual = 0
 	var property zombisEnTablero=[]
 	
 	method movimientosYAcciones() {
