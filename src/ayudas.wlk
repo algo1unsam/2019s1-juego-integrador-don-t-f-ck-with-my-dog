@@ -76,6 +76,8 @@ class Jaula inherits ObjetoCerrado {
 	method encerrarAAlguien(){
 		if (estaAbierto){  game.removeVisual(tieneEncerrado) }
 	} 
+	
+	override method esUsado() {}
 }
 
 class Gema {
