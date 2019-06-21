@@ -1,0 +1,18 @@
+import wollok.game.*
+import franky.*
+import Direcciones.*
+import enemigos.*
+import constructorTablero.*
+import ayudas.*  
+
+program DontFuckWithMyDog {  
+ 
+	game.title("Don't fuck with my Dog!")
+	game.height(13)
+	game.width(20)
+	game.ground("ground.png")
+	
+	constructorTablero.cargarMapa() 
+
+	game.start()
+} 
