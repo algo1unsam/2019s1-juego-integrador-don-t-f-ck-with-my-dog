@@ -445,6 +445,7 @@ object mapa3 {
 	var sierra6 = new Sierra(posicionInicial = game.at(7,5), direccionInicial = arriba)
 	var zombi1 = new Zombi(posicionInicial = game.at(2,1), direccionInicial = derecha, posicionFinal=game.at(17,1),image="zombi-right-1.png")
 	var zombi2 = new Zombi(posicionInicial = game.at(2,11), direccionInicial = derecha, posicionFinal=game.at(18,11),image="zombi-right-1.png")
+	var fantasma1 = new Fantasma(posicionInicial = game.at(1,2), direccionInicial = derecha, posicionFinal=game.at(18,2))
 	
 	var palanca1 = new Palanca(position = game.at(1,1),objetoCerrado=jaula1)
 	var palanca2 = new Palanca(position = game.at(1,11),objetoCerrado=jaula1)
@@ -501,6 +502,7 @@ object mapa3 {
 		sierra6.agregarEnTablero()
 		zombi1.agregarEnTablero()
 		zombi2.agregarEnTablero()
+		fantasma1.agregarEnTablero()
 		
 		sierra1.moverse()
 		sierra2.moverse()
@@ -510,6 +512,7 @@ object mapa3 {
 		sierra6.moverse()
 		zombi1.moverse()
 		zombi2.moverse()
+		fantasma1.moverse()
 		game.hideAttributes(sierra1)
 		game.hideAttributes(sierra2)
 		game.hideAttributes(sierra3)
@@ -518,6 +521,7 @@ object mapa3 {
 		game.hideAttributes(sierra6)
 		game.hideAttributes(zombi1)
 		game.hideAttributes(zombi2)
+		game.hideAttributes(fantasma1)
 	}
 	
 	method agregarAyudas() {

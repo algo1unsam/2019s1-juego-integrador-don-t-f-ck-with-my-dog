@@ -308,11 +308,12 @@ class Zombi inherits Enemigo {
 		if (direccion == izquierda){ direccion = derecha }
 		else { if (direccion == derecha){ direccion = izquierda }}
 	}
-	
+	/*
 	override method agregarEnTablero(){
 		super()
 		constructorTablero.zombisEnTablero().add(self)
 	}
+	*/
 }
 
 class Fantasma inherits Enemigo {
@@ -324,15 +325,19 @@ class Fantasma inherits Enemigo {
 	method moverse() { game.onTick(600, "mover fantasma", { self.correr()}) }
 	
 	method correr() {
-		if (position == posicionFinal) { game.removeVisual(self) }
+		if (position == posicionFinal) { 
+			game.removeTickEvent("mover fantasma")
+			game.removeVisual(self)
+			self.aparecer()
+		}
 		else { direccion.mover(self) }
 	}
 	
 	method aparecerYMoverse() { 
 		self.position(posicionInicial)
 		game.addVisual(self)
+		game.removeTickEvent("aparecer fantasma")
 		self.moverse()
 	}
-	
 	method aparecer() { game.onTick(2000, "aparecer fantasma", { self.aparecerYMoverse() }) }
 }
