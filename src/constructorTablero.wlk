@@ -14,7 +14,16 @@ object pared {
 object gameOver {
 	method image() = "game-over.png"
 	
-	method cerrarJuego() {game.onTick(2000,"Game over", {game.stop()})}
+	method cerrarJuego() { game.onTick(2000,"Game over", {game.stop()}) }
+}
+
+object finDelJuego { 
+	method image() = "pantalla-final-4.png"
+	
+	method fin() {
+		game.addVisualIn(self, game.origin())
+		gameOver.cerrarJuego()
+	}
 }
 
 //va a ser el objeto que va a ir generando los diferentes mapas
@@ -39,7 +48,6 @@ object constructorTablero {
 		
 		//COLISIONES
 		game.whenCollideDo(franky, {enemigo => enemigo.chocarCon(franky)})
-//		game.whenCollideDo(franky, {agua => agua.chocarCon(franky)})
 	}
 	
 	method posicionInicialFranky() = mapas.get(nroMapaActual).posicionFranky()
@@ -444,9 +452,11 @@ object mapa3 {
 	var sierra5 = new Sierra(posicionInicial = game.at(11,5), direccionInicial = arriba)
 	var sierra6 = new Sierra(posicionInicial = game.at(7,5), direccionInicial = arriba)
 	var zombi1 = new Zombi(posicionInicial = game.at(2,1), direccionInicial = derecha, posicionFinal=game.at(17,1),image="zombi-right-1.png")
-	var zombi2 = new Zombi(posicionInicial = game.at(2,11), direccionInicial = derecha, posicionFinal=game.at(18,11),image="zombi-right-1.png")
-	var fantasma1 = new Fantasma(posicionInicial = game.at(1,2), direccionInicial = derecha, posicionFinal=game.at(18,2))
-	
+//	var zombi2 = new Zombi(posicionInicial = game.at(2,11), direccionInicial = derecha, posicionFinal=game.at(18,11),image="zombi-right-1.png")
+	var fantasma1 = new Fantasma(posicionInicial = game.at(1,11), direccionInicial = derecha, posicionFinal=game.at(18,11))
+	var fantasma2 = new Fantasma(posicionInicial = game.at(18,10), direccionInicial = izquierda, posicionFinal = game.at(1,10))
+	var arquero1 = new Arquero(posicionInicial = game.at(1,2), direccionInicial = arriba, arma=null)
+	var arquero2 = new Arquero(posicionInicial = game.at(18,11), direccionInicial = abajo, arma=null)
 	var palanca1 = new Palanca(position = game.at(1,1),objetoCerrado=jaula1)
 	var palanca2 = new Palanca(position = game.at(1,11),objetoCerrado=jaula1)
 	var palanca3 = new Palanca(position = game.at(18,1),objetoCerrado=jaula1)
@@ -501,8 +511,11 @@ object mapa3 {
 		sierra5.agregarEnTablero()
 		sierra6.agregarEnTablero()
 		zombi1.agregarEnTablero()
-		zombi2.agregarEnTablero()
+	//	zombi2.agregarEnTablero()
 		fantasma1.agregarEnTablero()
+		fantasma2.agregarEnTablero()
+		arquero1.agregarEnTablero()
+		arquero2.agregarEnTablero()
 		
 		sierra1.moverse()
 		sierra2.moverse()
@@ -511,8 +524,12 @@ object mapa3 {
 		sierra5.moverse()
 		sierra6.moverse()
 		zombi1.moverse()
-		zombi2.moverse()
+	//	zombi2.moverse()
 		fantasma1.moverse()
+		fantasma2.moverse()
+		arquero1.dispararFlecha(300)
+		arquero2.dispararFlecha(300)
+		
 		game.hideAttributes(sierra1)
 		game.hideAttributes(sierra2)
 		game.hideAttributes(sierra3)
@@ -520,25 +537,41 @@ object mapa3 {
 		game.hideAttributes(sierra5)
 		game.hideAttributes(sierra6)
 		game.hideAttributes(zombi1)
-		game.hideAttributes(zombi2)
+	//	game.hideAttributes(zombi2)
 		game.hideAttributes(fantasma1)
+		game.hideAttributes(fantasma2)
+		game.hideAttributes(arquero1)
+		game.hideAttributes(arquero2)
 	}
 	
 	method agregarAyudas() {
-		game.addVisual(jaula1)
 		constructorTablero.agregarPalancaTablero(palanca1)
 		constructorTablero.agregarPalancaTablero(palanca2)
 		constructorTablero.agregarPalancaTablero(palanca3)
+		
+		game.hideAttributes(palanca1)
+		game.hideAttributes(palanca2)
+		game.hideAttributes(palanca3)
 		
 	}
 	
 	method agregarFranky() {
 		game.addVisual(franky)
 		franky.position(posicionFranky)
-		//game.addVisual(huesitos)
-		//game.hideAttributes(huesitos)
 		game.hideAttributes(franky)
+		game.addVisual(huesitos)
+		game.hideAttributes(huesitos)
+		game.addVisual(jaula1)
+		game.hideAttributes(jaula1)
 	}
 	
-	method agregarVidas() {}
+	method agregarVidas() {
+		game.addVisualIn(vida3, game.at(15,12))
+		game.addVisualIn(vida2, game.at(14,12))
+		game.addVisualIn(vida1, game.at(13,12)) 
+		
+		game.hideAttributes(vida1)
+		game.hideAttributes(vida2)
+		game.hideAttributes(vida3)
+	}
 }

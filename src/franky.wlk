@@ -20,6 +20,8 @@ object franky {
 		//constructorTablero.frankySeMovio()
 	}
 	
+	method encontroAHuesitos() = direccion.devolverProximaPosicion(self.position()).contains(huesitos)
+	
 	method movimiento(direccionTecla, imagenDireccion){
 		if (self.direccion() == direccionTecla){ direccion.mover(self) }
 		else { self.cambiarDireccion(imagenDireccion, direccionTecla) }
@@ -102,7 +104,7 @@ object franky {
 }
 
 object huesitos {
-	var property position=game.at(0,0)
+	var property position=game.at(9,6)
 	var property direccion = izquierda
 	
 	method image() {
@@ -112,9 +114,7 @@ object huesitos {
 		else return "huesitos-right.png"
 	}
 	
-	method chocarCon(jugador){
-		jugador.direccion().retroceder(jugador)
-	}
+	method chocarCon(jugador){ finDelJuego.fin() }
 }
 
 object tumba {

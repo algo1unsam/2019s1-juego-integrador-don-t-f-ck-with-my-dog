@@ -58,7 +58,7 @@ class Jaula inherits ObjetoCerrado {
 	
 	method image()  {
 		if (estaAbierto) return "ground.png"
-		else return "wall.png"
+		else return "jaula-2.png"
 	}
 	
 	override method cerrar(){
@@ -70,13 +70,11 @@ class Jaula inherits ObjetoCerrado {
 		self.liberarAAlguien()
 	}
 	method liberarAAlguien(){
-		if (estaAbierto){
-		game.addVisualIn(tieneEncerrado,position)
-		}
+		if (estaAbierto){ game.addVisualIn(tieneEncerrado,position) }
 		//game.removeVisual(self)
 	}
 	method encerrarAAlguien(){
-		if (estaAbierto){game.removeVisual(tieneEncerrado)}
+		if (estaAbierto){  game.removeVisual(tieneEncerrado) }
 	} 
 }
 

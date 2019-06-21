@@ -318,11 +318,13 @@ class Zombi inherits Enemigo {
 
 class Fantasma inherits Enemigo {
 	var property posicionFinal
-	var imagen = "ghost-right.png"
 	
-	method image() = imagen
+	method image() {
+		if (direccionInicial == derecha) return "ghost-right.png"
+		else return "ghost-left.png"
+	}
 	
-	method moverse() { game.onTick(600, "mover fantasma", { self.correr()}) }
+	method moverse() { game.onTick(200, "mover fantasma", { self.correr()}) }
 	
 	method correr() {
 		if (position == posicionFinal) { 
