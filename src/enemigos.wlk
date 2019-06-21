@@ -18,6 +18,8 @@ class Enemigo {
 		} 
 	}
 	
+	method move(nuevaPosicion) { self.position(nuevaPosicion) }
+	
 	method agregarEnTablero(){
 		position=posicionInicial
 		direccion=direccionInicial
@@ -49,8 +51,6 @@ class Lobo inherits Enemigo {
 		else { self.cambiarDireccion() }
 	}
 	
-	method move(nuevaPosicion) { self.position(nuevaPosicion) }
-	
 	method cambiarDireccion(){
 		if (direccion == izquierda){
 			direccion = derecha
@@ -79,9 +79,6 @@ class Murcielago inherits Enemigo{
 		}
 		else { self.cambiarDireccion() }
 	}
-	
-	
-	method move(nuevaPosicion) { self.position(nuevaPosicion) }
 	
 	method cambiarDireccion(){
 		if (direccion == abajo){
@@ -145,8 +142,6 @@ class Flecha inherits Enemigo{
 		direccion.mover(self)
 		if (position.allElements().contains(pared)){ self.move(posicionInicial) }
 	}
-
-	method move(nuevaPosicion) { self.position(nuevaPosicion) }
 	
 	override method esAtacado(){}
 	
@@ -170,8 +165,6 @@ class Boomerang inherits Enemigo {
 		else { direccion = abajo }
 		pasos = 0
 	}
-	
-	method move(nuevaPosicion) { self.position(nuevaPosicion) }
 	
 	override method esAtacado(){}
 }
@@ -243,8 +236,6 @@ class Sierra inherits Enemigo {
 		pasos = 0
 		//i = 0
 	}
-	
-	method move(nuevaPosicion) { self.position(nuevaPosicion) }
 	
 	override method esAtacado(){}
 }
@@ -322,6 +313,26 @@ class Zombi inherits Enemigo {
 		super()
 		constructorTablero.zombisEnTablero().add(self)
 	}
+}
+
+class Fantasma inherits Enemigo {
+	var property posicionFinal
+	var imagen = "ghost-right.png"
 	
-	method move(nuevaPosicion) { self.position(nuevaPosicion) }
+	method image() = imagen
+	
+	method moverse() { game.onTick(600, "mover fantasma", { self.correr()}) }
+	
+	method correr() {
+		if (position == posicionFinal) { game.removeVisual(self) }
+		else { direccion.mover(self) }
+	}
+	
+	method aparecerYMoverse() { 
+		self.position(posicionInicial)
+		game.addVisual(self)
+		self.moverse()
+	}
+	
+	method aparecer() { game.onTick(2000, "aparecer fantasma", { self.aparecerYMoverse() }) }
 }
