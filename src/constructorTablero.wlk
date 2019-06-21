@@ -110,7 +110,7 @@ object mapa1  {
 	var property posicionFinalFranky = game.at(19,1)
 	
 	//Creo las ayudas
-	var puerta = new Puerta(position = game.at(19,1))
+	var puerta = new Puerta(position = game.at(19,1),activacionesNecesarias=1)
 	var palanca = new Palanca(position = game.at(2,4),objetoCerrado=puerta) 
 	var gema1 = new Gema()
 	var gema2 = new Gema()
@@ -428,7 +428,7 @@ object mapa3 {
 	var property posicionFranky = game.at(17,12)
 	var property posicionFinalFranky = game.at(16,0)
 	
-	var jaula1 = new Jaula(position = game.at(9,6),tieneEncerrado=huesitos)
+	var jaula1 = new Jaula(position = game.at(9,6),tieneEncerrado=huesitos,activacionesNecesarias=3)
 	
 	
 	var sierra1 = new Sierra(posicionInicial = game.at(10,8), direccionInicial = izquierda)

@@ -248,3 +248,26 @@ class Sierra inherits Enemigo {
 	
 	override method esAtacado(){}
 }
+
+class Zombi inherits Enemigo {
+	const posicionFinal
+	
+	override method esAtacado(){}
+	method moverse() { game.onTick(500, "lobo enemigo", {self.avanzar()}) }	
+	method avanzar(){
+		if (direccionInicial == direccion){
+		if (position == posicionFinal){self.cambiarDireccion()}
+		else { direccion.mover(self) }
+		}
+		else {
+			if (position == posicionInicial){self.cambiarDireccion()}
+			else { direccion.mover(self) }
+		}
+	}
+	method cambiarDireccion(){
+		if (direccion == izquierda){ direccion = derecha }
+		else { if (direccion == derecha){ direccion = izquierda }}
+		if (direccion == arriba){ direccion = abajo }
+		else { if (direccion == abajo){ direccion = arriba }}
+	}
+}

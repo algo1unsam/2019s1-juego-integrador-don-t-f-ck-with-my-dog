@@ -30,12 +30,17 @@ class Palanca{
 class ObjetoCerrado {
 	var property position
 	var estaAbierto = false
+	const activacionesNecesarias
+	var activaciones=0
 	
 	method abrir(){
+		activaciones++
+		if (activaciones == activacionesNecesarias)
 		estaAbierto=true
 	}
 	method cerrar(){ 
 		estaAbierto = false
+		activaciones=0
 	}
 	method chocarCon(jugador){ if (!estaAbierto){ jugador.direccion().retroceder(jugador) } }
 	method esAtacado(){}
@@ -56,18 +61,18 @@ class Jaula inherits ObjetoCerrado {
 		else return "wall.png"
 	}
 	
-	override method abrir(){
-		super()
-		self.liberarAAlguien()	
-	}
-	
 	override method cerrar(){
 		self.encerrarAAlguien()
 		super()
 	}
-	
+	override method abrir(){
+		super()
+		self.liberarAAlguien()
+	}
 	method liberarAAlguien(){
+		if (estaAbierto){
 		game.addVisualIn(tieneEncerrado,position)
+		}
 		//game.removeVisual(self)
 	}
 	method encerrarAAlguien(){
